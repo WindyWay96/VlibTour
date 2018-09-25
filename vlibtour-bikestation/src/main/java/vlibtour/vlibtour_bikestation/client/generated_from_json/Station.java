@@ -1,86 +1,96 @@
 // CHECKSTYLE:OFF
 package vlibtour.vlibtour_bikestation.client.generated_from_json;
-import java.util.Map;
-import java.io.IOException;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+"number",
+"name",
+"address",
+"position",
+"banking",
+"bonus",
+"status",
+"contract_name",
+"bike_stands",
+"available_bike_stands",
+"available_bikes",
+"last_update"
+})
 public class Station {
-	
-	    private long number;
-	    private String contractName;
-	    private String name;
-	    private String address;
-	    private Position position;
-	    private boolean banking;
-	    private boolean bonus;
-	    private long bikeStands;
-	    private long availableBikeStands;
-	    private long availableBikes;
-	    private String status;
-	    private long lastUpdate;
 
-	    @JsonProperty("number")
-	    public long getNumber() { return number; }
-	    @JsonProperty("number")
-	    public void setNumber(long value) { this.number = value; }
+@JsonProperty("number")
+public long number;
+@JsonProperty("name")
+public String name;
+@JsonProperty("address")
+public String address;
+@JsonProperty("position")
+public Position position;
+@JsonProperty("banking")
+public boolean banking;
+@JsonProperty("bonus")
+public boolean bonus;
+@JsonProperty("status")
+public String status;
+@JsonProperty("contract_name")
+public String contractName;
+@JsonProperty("bike_stands")
+public long bikeStands;
+@JsonProperty("available_bike_stands")
+public long availableBikeStands;
+@JsonProperty("available_bikes")
+public long availableBikes;
+@JsonProperty("last_update")
+public long lastUpdate;
 
-	    @JsonProperty("contract_name")
-	    public String getContractName() { return contractName; }
-	    @JsonProperty("contract_name")
-	    public void setContractName(String value) { this.contractName = value; }
+/**
+* No args constructor for use in serialization
+* 
+*/
+public Station() {
+}
 
-	    @JsonProperty("name")
-	    public String getName() { return name; }
-	    @JsonProperty("name")
-	    public void setName(String value) { this.name = value; }
+/**
+* 
+* @param position
+* @param bikeStands
+* @param status
+* @param address
+* @param lastUpdate
+* @param name
+* @param availableBikeStands
+* @param banking
+* @param bonus
+* @param number
+* @param contractName
+* @param availableBikes
+*/
+public Station(long number, String name, String address, Position position, boolean banking, boolean bonus, String status, String contractName, long bikeStands, long availableBikeStands, long availableBikes, long lastUpdate) {
+super();
+this.number = number;
+this.name = name;
+this.address = address;
+this.position = position;
+this.banking = banking;
+this.bonus = bonus;
+this.status = status;
+this.contractName = contractName;
+this.bikeStands = bikeStands;
+this.availableBikeStands = availableBikeStands;
+this.availableBikes = availableBikes;
+this.lastUpdate = lastUpdate;
+}
 
-	    @JsonProperty("address")
-	    public String getAddress() { return address; }
-	    @JsonProperty("address")
-	    public void setAddress(String value) { this.address = value; }
+@Override
+public String toString() {
+return new ToStringBuilder(this).append("number", number).append("name", name).append("address", address).append("position", position).append("banking", banking).append("bonus", bonus).append("status", status).append("contractName", contractName).append("bikeStands", bikeStands).append("availableBikeStands", availableBikeStands).append("availableBikes", availableBikes).append("lastUpdate", lastUpdate).toString();
+}
 
-	    @JsonProperty("position")
-	    public Position getPosition() { return position; }
-	    @JsonProperty("position")
-	    public void setPosition(Position value) { this.position = value; }
-
-	    @JsonProperty("banking")
-	    public boolean getBanking() { return banking; }
-	    @JsonProperty("banking")
-	    public void setBanking(boolean value) { this.banking = value; }
-
-	    @JsonProperty("bonus")
-	    public boolean getBonus() { return bonus; }
-	    @JsonProperty("bonus")
-	    public void setBonus(boolean value) { this.bonus = value; }
-
-	    @JsonProperty("bike_stands")
-	    public long getBikeStands() { return bikeStands; }
-	    @JsonProperty("bike_stands")
-	    public void setBikeStands(long value) { this.bikeStands = value; }
-
-	    @JsonProperty("available_bike_stands")
-	    public long getAvailableBikeStands() { return availableBikeStands; }
-	    @JsonProperty("available_bike_stands")
-	    public void setAvailableBikeStands(long value) { this.availableBikeStands = value; }
-
-	    @JsonProperty("available_bikes")
-	    public long getAvailableBikes() { return availableBikes; }
-	    @JsonProperty("available_bikes")
-	    public void setAvailableBikes(long value) { this.availableBikes = value; }
-
-	    @JsonProperty("status")
-	    public String getStatus() { return status; }
-	    @JsonProperty("status")
-	    public void setStatus(String value) { this.status = value; }
-
-	    @JsonProperty("last_update")
-	    public long getLastUpdate() { return lastUpdate; }
-	    @JsonProperty("last_update")
-	    public void setLastUpdate(long value) { this.lastUpdate = value; }
-	}
+}
 	
 	
 
