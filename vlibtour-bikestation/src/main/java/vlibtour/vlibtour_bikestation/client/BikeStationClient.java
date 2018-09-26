@@ -21,6 +21,20 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.client;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Properties;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+
+import vlibtour.vlibtour_bikestation.client.generated_from_json.Station;
+
 /**
  * The bike station REST client example.
  */
@@ -29,6 +43,37 @@ public final class BikeStationClient {
 	/**
 	 * utility class with no instance.
 	 */
+	private static String restURI;
+	
 	private BikeStationClient() {
+	}
+	
+	public static void main(final String[] args) throws IOException {
+		Properties properties = new Properties();
+		FileInputStream input = new FileInputStream("src/main/resources/rest.properties");
+		properties.load(input);
+		restURI = "http://" + properties.getProperty("rest.serveraddress") + "/MyServer";
+		
+		Client client = ClientBuilder.newClient();
+		URI uri = UriBuilder.fromUri(restURI).build();
+		WebTarget service = client.target(uri);
+		
+		System.out.println("init bike station : \n" + 
+				service.path("stations/init").request().accept(MediaType.TEXT_XML).get(String.class));
+		
+		System.out.println("-------------------------------------");
+		
+		System.out.println("all stations in plain text : \n" + 
+				service.path("stations/alltxt").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+		
+		System.out.println("-------------------------------------");
+		
+		System.out.println("all stations in XML		: \n" + 
+				service.path("stations/all").request().accept(MediaType.TEXT_XML).get(Station.class));
+		
+		System.out.println("-------------------------------------");
+		
+		System.out.println("all stations in json    : \n" + 
+				service.path("station/alljson").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
 	}
 }
