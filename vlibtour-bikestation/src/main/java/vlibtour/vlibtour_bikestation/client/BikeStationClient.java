@@ -35,7 +35,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
+import vlibtour.vlibtour_bikestation.client.generated_from_json.Station;
+
 
 /**
  * The bike station REST client example.
