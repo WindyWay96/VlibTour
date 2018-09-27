@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -90,6 +91,9 @@ public final class BikeStationClient {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Station station = objectMapper.readValue(response, Station.class);
 		
+		System.out.println("###################################################"); 
+        System.out.println("#     QUERY DYNAMIC DATASET ON JCDECAUX SERVER    #");
+        System.out.println("###################################################"); 
 		// Print name of station
 		System.out.println("Name of station" + station.getName());
 		
