@@ -21,6 +21,15 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.emulatedserver;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Properties;
+
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+
 /**
  * Main class.
  *
