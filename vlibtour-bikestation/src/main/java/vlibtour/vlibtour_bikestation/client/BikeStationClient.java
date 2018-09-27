@@ -102,6 +102,8 @@ public final class BikeStationClient {
 		
 		// How many bikes available?
 		System.out.println("There are" + " " + station.getAvailableBikes() + " " + "bikes available in" + " " + station.getAddress());
+		// How many bike-stands available?
+		System.out.println("There are total" + " " + station.getBikeStands() + " " + "bike-stands available in" + " " + station.getAddress());
 
 		
 		callEmulated();
