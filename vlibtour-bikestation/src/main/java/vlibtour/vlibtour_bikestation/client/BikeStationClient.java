@@ -16,11 +16,10 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.client;
 
-import vlibtour.vlibtour_bikestation.client.generated_from_json.Station;
-
 //import static org.junit.Assert.assertThat;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
@@ -31,6 +30,12 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
 
 /**
  * The bike station REST client example.
@@ -63,16 +68,56 @@ public final class BikeStationClient {
 		
 		String contract = properties.getProperty("jcdecaux.contract");
 		String apiKey = properties.getProperty("jcdecaux.apiKey");
-								
+		
+	/************************************
+	* Test the client with dynamic data
+	* in real server (jcdecaux API )
+	* input parameter: station id = 2010
+	*************************************/	
+		
+		// https://api.jcdecaux.com/vls/v1/stations/2010?contract=lyon&apiKey=53e15d3779d1c15af0f8a4137a7bbccc2e04f0e0
+		
 		restURI = properties.getProperty("jcdecaux.rooturl") + "/stations/2010?contract=" + contract + "&apiKey=" + apiKey;
-		//https://api.jcdecaux.com/vls/v1/stations/2010?contract=lyon&apiKey=53e15d3779d1c15af0f8a4137a7bbccc2e04f0e0
 		Client client = ClientBuilder.newClient();
 		URI uri = UriBuilder.fromUri(restURI).build();
 		WebTarget service = client.target(uri);
-		System.out.println(uri + "test");
-		System.out.println("the station in json      : \n"
-				+ service.request().accept(MediaType.APPLICATION_JSON).get(String.class));
+		
+		// Get streaming data from API
+		String response = service.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+		
+		// Map json data to java object 
+		ObjectMapper objectMapper = new ObjectMapper();
+		Station station = objectMapper.readValue(response, Station.class);
+		
+		// Print name of station
+		System.out.println("Name of station" + station.getName());
+		
+		// Print address of station
+		System.out.println("Address of station is" + " " + station.getAddress());
+		
+		// How many bikes available?
+		System.out.println("There are" + " " + station.getAvailableBikes() + " " + "bikes available in" + " " + station.getAddress());
 
+		
+		callEmulated();
+
+	}
+	
+	/***************************************
+	 * Test the client with emulated server
+	 **************************************/	
+		
+	private static void callEmulated() throws IOException {
+		Properties properties = new Properties();
+		FileInputStream input = new FileInputStream("src/main/resources/Lyon.json");
+		properties.load(input);		
+		
+		//TODO
+		
+		// method to map static data to java object
+
+		// Call query to the emulated server
+		
 		
 	}
 }

@@ -21,8 +21,42 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.emulatedserver;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
 /**
  * The bike stations emulated REST server.
  */
+@Path("/stations")
 public final class StationsRest {
+	/**
+	 * read all the stations from Paris
+	 * 
+	 * @return the list of stations in Paris
+	 */
+	@GET
+	public String getAllStations() {
+		
+		//TODO
+		
+		return "";
+	}
+	
+	
+	/**
+	 * read all the properties from a specific station in Paris
+	 * 
+	 * @param id
+	 * 
+	 * @return the list of properties from give id
+	 */
+	@GET
+	@Path("{id}")
+	public String getOneStation(@PathParam(value = "id") int id) {
+		
+		//TODO
+		
+		return "";
+	}
 }
