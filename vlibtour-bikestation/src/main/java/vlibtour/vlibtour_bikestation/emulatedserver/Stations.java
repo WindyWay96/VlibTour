@@ -21,8 +21,19 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.emulatedserver;
 
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+
 /**
  * The stations REST server.
  */
 public class Stations {
+
 }

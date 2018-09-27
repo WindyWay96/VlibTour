@@ -1,10 +1,6 @@
 jcdecaux.rooturl=https://api.jcdecaux.com/vls/v1
 #jcdecaux.rooturl=http://127.0.0.1:8888/ pb côté serveur
 
-<<<<<<< HEAD
 jcdecaux.server=http://localhost:8888/MyServer
-=======
-#jcdecaux.rooturl=http://localhost:8888/MyServer/
->>>>>>> origin
 jcdecaux.contract=lyon
 jcdecaux.apiKey=53e15d3779d1c15af0f8a4137a7bbccc2e04f0e0

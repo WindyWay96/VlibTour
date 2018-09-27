@@ -1,10 +1,13 @@
 package vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+=======
+>>>>>>> origin
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -28,6 +31,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Station {
 
 @JsonProperty("number")
+<<<<<<< HEAD
 private long number;
 @JsonProperty("name")
 private String name;
@@ -53,6 +57,31 @@ private long availableBikes;
 private long lastUpdate;
 @JsonIgnore
 private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+=======
+public long number;
+@JsonProperty("name")
+public String name;
+@JsonProperty("address")
+public String address;
+@JsonProperty("position")
+public Position position;
+@JsonProperty("banking")
+public boolean banking;
+@JsonProperty("bonus")
+public boolean bonus;
+@JsonProperty("status")
+public String status;
+@JsonProperty("contract_name")
+public String contractName;
+@JsonProperty("bike_stands")
+public long bikeStands;
+@JsonProperty("available_bike_stands")
+public long availableBikeStands;
+@JsonProperty("available_bikes")
+public long availableBikes;
+@JsonProperty("last_update")
+public long lastUpdate;
+>>>>>>> origin
 
 /**
 * No args constructor for use in serialization
@@ -90,6 +119,7 @@ this.bikeStands = bikeStands;
 this.availableBikeStands = availableBikeStands;
 this.availableBikes = availableBikes;
 this.lastUpdate = lastUpdate;
+<<<<<<< HEAD
 }
 
 @JsonProperty("number")
@@ -228,3 +258,16 @@ return new ToStringBuilder(this).append("number", number).append("name", name).a
 }
 
 }
+=======
+}
+
+@Override
+public String toString() {
+return new ToStringBuilder(this).append("number", number).append("name", name).append("address", address).append("position", position).append("banking", banking).append("bonus", bonus).append("status", status).append("contractName", contractName).append("bikeStands", bikeStands).append("availableBikeStands", availableBikeStands).append("availableBikes", availableBikes).append("lastUpdate", lastUpdate).toString();
+}
+
+}
+	
+	
+
+>>>>>>> origin

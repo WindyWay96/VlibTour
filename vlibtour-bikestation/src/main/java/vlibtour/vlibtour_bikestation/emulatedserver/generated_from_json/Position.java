@@ -1,10 +1,13 @@
 package vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+=======
+>>>>>>> origin
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,11 +21,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Position {
 
 @JsonProperty("lat")
+<<<<<<< HEAD
 private double lat;
 @JsonProperty("lng")
 private double lng;
 @JsonIgnore
 private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+=======
+public double lat;
+@JsonProperty("lng")
+public double lng;
+>>>>>>> origin
 
 /**
 * No args constructor for use in serialization
@@ -42,6 +51,7 @@ this.lat = lat;
 this.lng = lng;
 }
 
+<<<<<<< HEAD
 @JsonProperty("lat")
 public double getLat() {
 return lat;
@@ -77,4 +87,11 @@ public String toString() {
 return new ToStringBuilder(this).append("lat", lat).append("lng", lng).append("additionalProperties", additionalProperties).toString();
 }
 
+=======
+@Override
+public String toString() {
+return new ToStringBuilder(this).append("lat", lat).append("lng", lng).toString();
+}
+
+>>>>>>> origin
 }
