@@ -37,6 +37,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vlibtour.vlibtour_bikestation.client.generated_from_json.Station;
+import vlibtour.vlibtour_bikestation.emulatedserver.Stations;
 
 
 /**
@@ -64,6 +65,10 @@ public final class BikeStationClient {
 	 *             problem with HTTP connection.
 	 */
 	public static void main(final String[] args) throws IOException {
+		callEmulated();
+	}
+	
+	public static void clientSide() throws IOException {
 		Properties properties = new Properties();
 		FileInputStream input = new FileInputStream("src/main/resources/rest.properties");
 		properties.load(input);
@@ -116,15 +121,21 @@ public final class BikeStationClient {
 		
 	private static void callEmulated() throws IOException {
 		Properties properties = new Properties();
-		FileInputStream input = new FileInputStream("src/main/resources/Lyon.json");
+		FileInputStream input = new FileInputStream("src/main/resources/rest.properties");
 		properties.load(input);		
+		restURI = properties.getProperty("jcdecaux.server");
+		Client client = ClientBuilder.newClient();
+		URI uri = UriBuilder.fromUri(restURI).build();
+		WebTarget service = client.target(uri);
 		
 		//TODO
-		
+		System.out.println("all stations in JSON : \n"
+				+ service.path("/stations/all").request().accept(MediaType.TEXT_PLAIN).get(String.class));
 		// method to map static data to java object
 
 		// Call query to the emulated server
-		
+		System.out.println("station with id 1020: \n"
+				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
 		
 	}
 }

@@ -28,6 +28,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
@@ -35,5 +36,43 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  * The stations REST server.
  */
 public class Stations {
+	
+	@XmlElementWrapper(name = "stations")
+	@XmlElement(name = "station")
+	private List<Station> stations = new ArrayList<Station>();
 
+	/**
+	 * default constructor.
+	 */
+	public Stations() {
+	}
+
+	
+	public Stations(final List<Station> stations) {
+		this.stations = stations;
+	}
+
+	
+	public void add(final Station station) {
+		stations.add(station);
+	}
+	
+	public Station lookupId(final long id) {
+		Station station;
+		for (Iterator<Station> it = stations.iterator(); it.hasNext();) {
+			station = it.next();
+			if (station.getNumber() == id) {
+				return station;
+			}
+		}
+		return null;
+	}
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder();
+		for (Iterator<Station> it = stations.iterator(); it.hasNext();) {
+			output = output.append(it.next() + "\n");
+		}
+		return output.toString();
+	}
 }
