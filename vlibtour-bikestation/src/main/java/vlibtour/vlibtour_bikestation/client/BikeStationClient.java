@@ -128,14 +128,17 @@ public final class BikeStationClient {
 		URI uri = UriBuilder.fromUri(restURI).build();
 		WebTarget service = client.target(uri);
 		
-		//TODO
+		//Print all 
 		System.out.println("all stations in JSON : \n"
 				+ service.path("/stations/all").request().accept(MediaType.TEXT_PLAIN).get(String.class));
-		// method to map static data to java object
+		
 
-		// Call query to the emulated server
-		System.out.println("station with id 1020: \n"
+		//Print a station with a given 
+		System.out.println("station with id 31705: \n"
 				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+		
+		System.out.println("station with id 1020: \n"
+				+ service.path("/stations/search/1020").request().accept(MediaType.TEXT_PLAIN).get(String.class));
 		
 	}
 }
