@@ -2,7 +2,9 @@ package vlibtour.vlibtour_client_group_communication_system;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.BuiltinExchangeType;
@@ -21,11 +23,12 @@ import com.rabbitmq.client.Envelope;
 public class VLibTourGroupCommunicationSystemClient {
 	
 	private Connection connection;
-
+    private Consumer consumer;
 	private Channel channel;
 	private String routingKey;
 	private String message;
-	
+	private String queueName;
+	private String bindingKey;
 	private String groupID;
 	private String tourID;
 	private String userID;
@@ -46,7 +49,8 @@ public class VLibTourGroupCommunicationSystemClient {
 		this.userID = userID;
 		
 		this.EXCHANGE_NAME = groupID + "_" + userID;
-		
+		this.queueName = tourID + "_" + userID;
+		this.bindingKey = "*." + this.queueName +".#"; 
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
 		connection = factory.newConnection();
@@ -58,7 +62,6 @@ public class VLibTourGroupCommunicationSystemClient {
 	}
 	
 	public String addConsumer(Consumer consumer, String queueName, String bindingKey) throws IOException, TimeoutException {
-		queueName = channel.queueDeclare().getQueue();
 		channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
 		consumer = new DefaultConsumer(channel){
 			@Override
@@ -85,8 +88,25 @@ public class VLibTourGroupCommunicationSystemClient {
 		}
 	}
 	
+	private static String getRouting(final String[] strings) {
+		if (strings.length < 1) {
+			return "anonymous.info";
+		}
+		return strings[0];
+	}
+	
+	private static String getMessage(final String[] strings) {
+		if (strings.length < 2) {
+			return "Hello World";
+		}
+		return Arrays.asList(strings).stream().skip(1).collect(Collectors.joining(" "));
+	}
+
 	public static void main(final String[] argv) throws Exception {
-		VLibTourGroupCommunicationSystemClient obj = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1000", "anonymous.info", "Hello");
+		String routingKey = getRouting(argv);
+		String message = getMessage(argv);
 		
+		VLibTourGroupCommunicationSystemClient obj = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", routingKey, message);
+		obj.addConsumer(obj.consumer, obj.queueName, obj.bindingKey);
 	}
 }

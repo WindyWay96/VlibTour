@@ -128,14 +128,14 @@ public final class BikeStationClient {
 		WebTarget service = client.target(uri);
 		
 		//Print all 
-		System.out.println("all stations : \n"
-				+ service.path("/stations/all").request().accept(MediaType.APPLICATION_JSON).get(String.class));
-		
+//		System.out.println("all stations : \n"
+//				+ service.path("/stations/all").request().accept(MediaType.APPLICATION_JSON).get(String.class));
+//		
 
 		//Print a station with a given 
-//		System.out.println("station with id 31705: \n"
-//				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
-//		
+		System.out.println("station with id 31705: \n"
+				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+		
 //		System.out.println("station with id 1020: \n"
 //				+ service.path("/stations/search/1020").queryParam("number", "1020").request().accept(MediaType.TEXT_PLAIN).get(String.class));
 //		
