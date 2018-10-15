@@ -58,7 +58,7 @@ public final class Main {
 		Properties properties = new Properties();
 		FileInputStream input = new FileInputStream("src/main/resources/rest.properties");
 		properties.load(input);
-		baseURI = properties.getProperty("jcdecaux.server");
+		baseURI = properties.getProperty("emulated.server");
 		// create a resource config that scans for JAX-RS resources and providers
 		// in the server package
 		final ResourceConfig rc = new ResourceConfig().packages("vlibtour.vlibtour_bikestation.emulatedserver");

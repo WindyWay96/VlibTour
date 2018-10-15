@@ -23,6 +23,7 @@ package vlibtour.vlibtour_bikestation.emulatedserver;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Stations {
 	
 	@XmlElementWrapper(name = "stations")
 	@XmlElement(name = "station")
-	private List<Station> stations = new ArrayList<Station>();
+	private List<Station> stations;
 
 	/**
 	 * default constructor.
@@ -58,11 +59,9 @@ public class Stations {
 	}
 	
 	public Station lookupId(final long id) {
-		Station station;
-		for (Iterator<Station> it = stations.iterator(); it.hasNext();) {
-			station = it.next();
-			if (station.getNumber() == id) {
-				return station;
+		for (Station s : stations) {
+			if (s.sameNumber(id)) {
+				return s;
 			}
 		}
 		return null;

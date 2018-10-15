@@ -23,10 +23,12 @@ package vlibtour.vlibtour_bikestation.emulatedserver;
 
 import java.util.List;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import io.restassured.path.json.JsonPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -39,6 +41,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.io.IOUtils;
+//import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -58,19 +63,26 @@ public final class StationsRest {
 	 */
 	
 	private String fileName = "src/main/resources/paris.json";
-	private Stations stations;
+	private List<Station> stations;
 	
 	private void JsonToJV(final String fileName) throws IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		List<Station> stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class));
-		stations = new Stations(stationList);
+		ObjectMapper mapper = new ObjectMapper(); //jackson class for converting from json to java 
+		List stationList; //JSON from file to Object
+		stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class)); // get the array of stations and convert to a list
+		stations= stationList;// create a Stations instance
 	}
 	@GET
 	@Path("/all")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getAllStations() throws IOException {
-		JsonToJV(fileName);
-		return stations.toString();
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllSONStations() throws IOException {
+		String everything = " ";
+		FileInputStream inputStream = new FileInputStream(fileName);
+		try {
+		     everything = IOUtils.toString(inputStream);
+		} finally {
+		    inputStream.close();
+		}
+		return everything;
 	}
 	
 	
@@ -83,10 +95,10 @@ public final class StationsRest {
 	 */
 	@GET
 	@Path("/search/{number}")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getOneStation(@PathParam("number") final long number) throws IOException {
-		JsonToJV(fileName);
-		return stations.lookupId(number).toString();
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getOneStation(@PathParam("number") final long number)  throws IOException {
+		
+		return JsonPath.from(fileName).get();
 		
 	}
 }

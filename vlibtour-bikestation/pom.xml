@@ -28,6 +28,7 @@ Contributor(s): Denis Conan
     <version>1.0-SNAPSHOT</version>
   </parent> 
   <artifactId>vlibtour-bikestation</artifactId>
+  <packaging>jar</packaging>
   <name>vlibtour-bikestation: the VlibTour Bikestation service (example client and emulation)</name>
  
   <dependencies>
@@ -47,31 +48,17 @@ Contributor(s): Denis Conan
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 
 	 for ToStringBuilder -->
+    <!-- https://mvnrepository.com/artifact/io.rest-assured/json-path -->
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-path</artifactId>
+    <version>3.1.1</version>
+</dependency>
+    
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
-    
-      <!-- Use Jackson library. -->
-    
-    <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.9.0</version>
-  </dependency>
-  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-annotations</artifactId>
-    <version>2.9.0</version>
-</dependency>
-  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.9.0</version>
-</dependency>
-  
   </dependencies>
   
   <build>

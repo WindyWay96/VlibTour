@@ -227,4 +227,7 @@ public String toString() {
 return new ToStringBuilder(this).append("number", number).append("name", name).append("address", address).append("position", position).append("banking", banking).append("bonus", bonus).append("status", status).append("contractName", contractName).append("bikeStands", bikeStands).append("availableBikeStands", availableBikeStands).append("availableBikes", availableBikes).append("lastUpdate", lastUpdate).append("additionalProperties", additionalProperties).toString();
 }
 
+public boolean sameNumber(final long id) {
+	return (this.getNumber() == id);
+}
 }

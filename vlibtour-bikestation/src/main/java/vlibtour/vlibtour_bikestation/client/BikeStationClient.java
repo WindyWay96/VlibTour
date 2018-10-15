@@ -23,13 +23,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
-
 import javax.swing.JOptionPane;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -66,6 +66,8 @@ public final class BikeStationClient {
 	 */
 	public static void main(final String[] args) throws IOException {
 		callEmulated();
+		//uncomment to test with the jcdecaux server
+		//clientSide();
 	}
 	
 	public static void clientSide() throws IOException {
@@ -110,9 +112,6 @@ public final class BikeStationClient {
 		// How many bike-stands available?
 		System.out.println("There are total" + " " + station.getBikeStands() + " " + "bike-stands available in" + " " + station.getAddress());
 
-		
-		callEmulated();
-
 	}
 	
 	/***************************************
@@ -123,22 +122,22 @@ public final class BikeStationClient {
 		Properties properties = new Properties();
 		FileInputStream input = new FileInputStream("src/main/resources/rest.properties");
 		properties.load(input);		
-		restURI = properties.getProperty("jcdecaux.server");
+		restURI = properties.getProperty("emulated.server");
 		Client client = ClientBuilder.newClient();
 		URI uri = UriBuilder.fromUri(restURI).build();
 		WebTarget service = client.target(uri);
 		
 		//Print all 
-		System.out.println("all stations in JSON : \n"
-				+ service.path("/stations/all").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+		System.out.println("all stations : \n"
+				+ service.path("/stations/all").request().accept(MediaType.APPLICATION_JSON).get(String.class));
 		
 
 		//Print a station with a given 
-		System.out.println("station with id 31705: \n"
-				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
-		
-		System.out.println("station with id 1020: \n"
-				+ service.path("/stations/search/1020").request().accept(MediaType.TEXT_PLAIN).get(String.class));
-		
+//		System.out.println("station with id 31705: \n"
+//				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+//		
+//		System.out.println("station with id 1020: \n"
+//				+ service.path("/stations/search/1020").queryParam("number", "1020").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+//		
 	}
 }
