@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import com.rabbitmq.client.AMQP;
@@ -34,6 +35,10 @@ public class VLibTourGroupCommunicationSystemClient {
 	private String userID;
 	
 	private String EXCHANGE_NAME;
+	private int nbMsgReceived = 0;
+	private static AtomicInteger totalNbMsgReceived = new AtomicInteger(0);
+	private static int c = 0;
+	private int me;
 	
 	/**
 	 * 
@@ -63,11 +68,14 @@ public class VLibTourGroupCommunicationSystemClient {
 	
 	public String addConsumer(Consumer consumer, String queueName, String bindingKey) throws IOException, TimeoutException {
 		channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
+		me = c++;
 		consumer = new DefaultConsumer(channel){
 			@Override
 			public void handleDelivery(final String consumeTag, final Envelope envelope, final AMQP.BasicProperties properties, final byte[] body) throws IOException {
 				String message = new String(body, "UTF-8");
 				System.out.println("Received" + " " + envelope.getRoutingKey() + ":" + message + "");
+				nbMsgReceived++;
+				totalNbMsgReceived.incrementAndGet();
 			}
 		};
 		
@@ -108,5 +116,8 @@ public class VLibTourGroupCommunicationSystemClient {
 		
 		VLibTourGroupCommunicationSystemClient obj = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", routingKey, message);
 		obj.addConsumer(obj.consumer, obj.queueName, obj.bindingKey);
+		
+		obj.publish();
+		obj.close();
 	}
 }
