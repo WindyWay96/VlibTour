@@ -69,6 +69,7 @@ public class VLibTourGroupCommunicationSystemClient {
 	}
 	
 	public String addConsumer(Consumer consumer, String queueName, String bindingKey) throws IOException, TimeoutException {
+		queueName = channel.queueDeclare().getQueue();
 		channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
 		me = c++;
 		consumer = new DefaultConsumer(channel){
@@ -84,6 +85,9 @@ public class VLibTourGroupCommunicationSystemClient {
 		return channel.basicConsume(queueName, true, consumer);
 	}
 	
+	public int getNbMsgReceived() {
+		return nbMsgReceived;
+	}
 	public void publish() throws UnsupportedEncodingException, IOException {
 		channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes("UTF-8"));
 		System.out.println("Sent " + routingKey + ":" + message + "");

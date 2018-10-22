@@ -40,6 +40,7 @@ public class TestScenario {
 		VLibTourGroupCommunicationSystemClient obj2 = new VLibTourGroupCommunicationSystemClient("gr2", "tour2", "usr2", "Andrea.Orlean ", "message two");
 		obj2.publish();
 		// obj1.addConsumer(obj1.consumer, obj1.queueName, obj1.bindingKey);
+		Assert.assertEquals(1, obj1.getNbMsgReceived());
 		
 		
 	}
