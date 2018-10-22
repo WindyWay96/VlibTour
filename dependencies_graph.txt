@@ -1,0 +1,149 @@
+*[INFO] Geocalc                                                            [jar]
+*[INFO] The VLibTour project                                               [pom]
+*[INFO] The VLibTour Tour Scenario Emulation                               [pom]
+*[INFO] The VLibTour library for emulating visits in a scenario            [jar]
+*[INFO] The VLibTour Map Viewer utility                                    [jar]
+*[INFO] The VLibTour Tour Management                                       [pom]
+*[INFO] vlibtour-tour-management-entity                                    [jar]
+[INFO] vlibtour-tour-management-api                                       [jar]
+[INFO] vlibtour-tour-management-bean                                      [ejb]
+[INFO] The VLibTour Lobby Room System                                     [pom]
+[INFO] The API of the VLibTour lobby room                                 [jar]
+[INFO] The VLibTour lobby room server                                     [jar]
+[INFO] The API of the VLibTour lobby room administration                  [jar]
+[INFO] The VLibTour lobby room administration server                      [jar]
+[INFO] The VlibTour Bikestation service (example client and emulation)    [jar]
+[INFO] The VLibTour Admin Client                                          [pom]
+[INFO] vlibtour-admin-client-tour-management                              [jar]
+[INFO] The VLibTour Client                                                [pom]
+[INFO] The VLibTour client API                                            [jar]
+[INFO] The VLibTour client of the lobby room                              [jar]
+[INFO] The VLibTour client of the lobby room                              [jar]
+[INFO] The VLibTour client of the group communication system              [jar]
+[INFO] The VLibTour client of the visit, all is done on the client side   [jar]
+[INFO] The VLibTour Scenario                                              [jar]
+[INFO] 
+[INFO]
+
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-api:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-entity:jar:1.0-SNAPSHOT:compile
+[INFO] \- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-bean >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-bean:ejb:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-entity:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-api:jar:1.0-SNAPSHOT:compile
+[INFO] \- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour:vlibtour-lobby-room-system:pom:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-server >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-server:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-api >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-api:jar:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-server >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-server:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-server:jar:1.0-SNAPSHOT:compile
+[INFO] |  \- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour:vlibtour-bikestation:jar:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour:vlibtour-admin-client:pom:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-admin-client:vlibtour-admin-client-tour-management >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-admin-client:vlibtour-admin-client-tour-management:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-entity:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-api:jar:1.0-SNAPSHOT:compile
+[INFO] |  |  |  |     \- net.java.dev.jna:jna:jar:4.4.0:compile
+[INFO] |  |  |  |  |  \- org.hibernate:hibernate-validator:jar:5.2.4.Final:compile
+[INFO] |  |  |  |  |     \- com.fasterxml:classmate:jar:1.1.0:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour:vlibtour-client:pom:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api >---
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-admin-client:vlibtour-admin-client-lobby-room >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-admin-client:vlibtour-admin-client-lobby-room:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-lobby-room >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-lobby-room:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-group-communication-system >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-group-communication-system:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] --< eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-visit-all-on-client-side >--
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-visit-all-on-client-side:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-entity:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.libraries-for-vlibtour:vlibtour-visit-emulation:jar:1.0-SNAPSHOT:compile
+[INFO] |  \- com.grum:geocalc:jar:0.5.1:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-group-communication-system:jar:1.0-SNAPSHOT:compile
+[INFO] |  \- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 
+[INFO] 
+[INFO] eu.telecomsudparis.vlibtour:vlibtour-scenario:jar:1.0-SNAPSHOT
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-entity:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-tour-management:vlibtour-tour-management-api:jar:1.0-SNAPSHOT:compile
+[INFO] |  |  |  |     \- net.java.dev.jna:jna:jar:4.4.0:compile
+[INFO] |  |  |  |  |  \- org.hibernate:hibernate-validator:jar:5.2.4.Final:compile
+[INFO] |  |  |  |  |     \- com.fasterxml:classmate:jar:1.1.0:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-server:jar:1.0-SNAPSHOT:compile
+[INFO] |  +- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-administration-api:jar:1.0-SNAPSHOT:compile
+[INFO] |  \- eu.telecomsudparis.vlibtour.vlibtour-lobby-room-system:vlibtour-lobby-room-server:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-admin-client:vlibtour-admin-client-lobby-room:jar:1.0-SNAPSHOT:compile
+[INFO] |  \- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-api:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-lobby-room:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-group-communication-system:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.vlibtour-client:vlibtour-client-visit-all-on-client-side:jar:1.0-SNAPSHOT:compile
+[INFO] |  +- eu.telecomsudparis.vlibtour.libraries-for-vlibtour:vlibtour-visit-emulation:jar:1.0-SNAPSHOT:compile
+[INFO] +- eu.telecomsudparis.vlibtour.libraries-for-vlibtour:vlibtour-map-viewer:jar:1.0-SNAPSHOT:compile
+[INFO] |  +- com.grum:geocalc:jar:0.5.1:compile
+[INFO] |  +- org.jxmapviewer:jxmapviewer2:jar:2.2:compile
+[INFO] |  \- org.openstreetmap.jmapviewer:jmapviewer:jar:2.3:compile
+[INFO] +- log4j:log4j:jar:1.2.17:compile
+[INFO] 

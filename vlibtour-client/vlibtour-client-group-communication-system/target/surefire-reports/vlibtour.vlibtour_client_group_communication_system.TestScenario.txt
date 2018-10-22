@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: vlibtour.vlibtour_client_group_communication_system.TestScenario
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.351 sec - in vlibtour.vlibtour_client_group_communication_system.TestScenario
