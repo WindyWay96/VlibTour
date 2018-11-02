@@ -1,20 +1,16 @@
-package vlibtour.vlibtour_client_group_communication_system;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.Test;
-import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import com.rabbitmq.http.client.Client;
 
-
-//import vlibtour.vlibtour_client_group_communication_system.VLibTourGroupCommunicationSystemClient;
-
+import vlibtour.vlibtour_client_group_communication_system.VLibTourGroupCommunicationSystemClient;
 public class TestScenario {
 	
 	private static Client c;
@@ -34,15 +30,30 @@ public class TestScenario {
 }
 	@Test
 	public void test() throws IOException, TimeoutException, InterruptedException, ExecutionException{
-
-		VLibTourGroupCommunicationSystemClient obj1 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", "Fabian.Tobiac ", "message one");
+		//Receiver rec1 = new Receiver("hello");
+		Assert.assertNotNull(c.getExchanges().stream().filter(q -> q.getName().equals(VLibTourGroupCommunicationSystemClient.EXCHANGE_NAME)));
+		VLibTourGroupCommunicationSystemClient obj1 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", "tour1_usr1", "message one");
+		obj1.addConsumer(obj1.getConsumer(), obj1.getQueueName(), "tour1_usr1");
 		obj1.publish();
-		VLibTourGroupCommunicationSystemClient obj2 = new VLibTourGroupCommunicationSystemClient("gr2", "tour2", "usr2", "Andrea.Orlean ", "message two");
+		
+		VLibTourGroupCommunicationSystemClient obj2 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr2", "tour1_usr2", "message two");
+		obj2.addConsumer(obj2.getConsumer(), obj2.getQueueName(), "tour1_usr2");
 		obj2.publish();
-		// obj1.addConsumer(obj1.consumer, obj1.queueName, obj1.bindingKey);
+		
+		Thread.sleep(3000);
+		
 		Assert.assertEquals(1, obj1.getNbMsgReceived());
+		Assert.assertEquals(1, obj2.getNbMsgReceived());
 		
+		obj1.close();
+		obj2.close();
 		
+	}
+	
+	@AfterClass
+	public static void tearDown() throws InterruptedException, IOException {
+		new ProcessBuilder("rabbitmqctl", "stop_app").inheritIO().start().waitFor();
+		new ProcessBuilder("rabbitmqctl", "stop").inheritIO().start().waitFor();
 	}
 
 }
