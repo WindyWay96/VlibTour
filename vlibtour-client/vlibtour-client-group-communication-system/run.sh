@@ -1,51 +1,60 @@
 #!/bin/bash
 
-MODULE_VERSION=0.1-SNAPSHOT
-RABBITMQ_CLIENT_VERSION=5.4.1
+# killall java # to think about the possibility of processes from old executions!
 
+# clean up the domain and the database
+asadmin undeploy vlibtour-tour-management-bean
+asadmin stop-database
+asadmin stop-domain domain1
+# start the domain and the database, and deploy the tour management bean
+asadmin start-domain domain1
+asadmin start-database
+asadmin deploy vlibtour-client/vlibtour-client-group-communication-system/target/vlibtour-client-group-communication-system-1.0-SNAPSHOT.jar
 
-if [[ -f ./target/step5-${MODULE_VERSION}.jar ]]
-then
-    export JARS=./target/step5-${MODULE_VERSION}.jar
-else
-    echo Archive file ./target/step5-${MODULE_VERSION}.jar missing
-    echo Run maven install to generate it
-fi
+# source the script and export in the script => definitions usable in the sequel
+. ./Scripts/utils.sh
 
-if [[ -f ${HOME}/.m2/repository/com/rabbitmq/amqp-client/${RABBITMQ_CLIENT_VERSION}/amqp-client-${RABBITMQ_CLIENT_VERSION}.jar ]]
-then
-    export JARS=${HOME}/.m2/repository/com/rabbitmq/amqp-client/${RABBITMQ_CLIENT_VERSION}/amqp-client-${RABBITMQ_CLIENT_VERSION}.jar:${JARS}
-else
-    echo Archive file ${HOME}/.m2/repository/com/rabbitmq/amqp-client/${RABBITMQ_CLIENT_VERSION}/amqp-client-${RABBITMQ_CLIENT_VERSION}.jar missing
-    echo Run maven install to install it on your local maven repository
-fi
+# populate the database with the POIs and the tours
+./Scripts/admin_client_tour_management.sh populate toursAndPOIs
 
-if [[ -f ${HOME}/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar ]]
-then
-    export JARS=${HOME}/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:${JARS}
-else
-    echo Archive file ${HOME}/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar missing
-    echo Run maven install to install it on your local maven repository
-fi
-
-if [[ -f ${HOME}/.m2/repository/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar ]]
-then
-    export JARS=${HOME}/.m2/repository/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar:${JARS}
-else
-    echo Archive file ${HOME}/.m2/repository/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar missing
-    echo Run maven install to install it on your local maven repository
-fi
-
+# clean up the rabbitmq server
 rabbitmqctl stop
+# start the rabbitmq server
 rabbitmq-server -detached
 rabbitmqctl stop_app
 rabbitmqctl reset
 rabbitmqctl start_app
 
-java -cp ${JARS} ${CONSUMER} 'hello' &
-TOREMOVE1=$!
+# start the lobby room server
+# source the script and LOBBYROOMSERVER exported in the script
+. ./Scripts/start_lobby_room_server.sh
+sleep 3
 
-sleep 2
-rabbitmqctl list_queues name durable auto_delete
-rabbitmqctl list_exchanges
-rabbitmqctl list_bindings
+# start the tourist applications
+# source the script and TOURISTAPPLICATION exported in the script
+. ./Scripts/start_tourist_application_w_emulated_location.sh Joe
+JOE=$TOURISTAPPLICATION
+sleep 1
+. ./Scripts/start_tourist_application_w_emulated_location.sh Avrel
+AVREL=$TOURISTAPPLICATION
+
+echo "Hit return to end the demonstration"
+read x
+
+# stop the lobby room server
+kill -9 $LOBBYROOMSERVER
+# stop the tourist application, just in case
+kill -9 $JOE
+kill -9 $AVREL
+
+# stop the rabbitmq server
+rabbitmqctl stop_app
+rabbitmqctl stop
+
+# empty the database
+./Scripts/admin_client_tour_management.sh empty toursAndPOIs
+
+# undeploy the bean, and stop the database and the domain
+asadmin undeploy vlibtour-tour-management-bean
+asadmin stop-database
+asadmin stop-domain domain1

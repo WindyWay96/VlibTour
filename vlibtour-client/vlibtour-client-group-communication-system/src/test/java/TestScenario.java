@@ -32,12 +32,12 @@ public class TestScenario {
 	public void test() throws IOException, TimeoutException, InterruptedException, ExecutionException{
 		//Receiver rec1 = new Receiver("hello");
 		Assert.assertNotNull(c.getExchanges().stream().filter(q -> q.getName().equals(VLibTourGroupCommunicationSystemClient.EXCHANGE_NAME)));
-		VLibTourGroupCommunicationSystemClient obj1 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", "tour1_usr1", "message one");
-		obj1.addConsumer(obj1.getConsumer(), obj1.getQueueName(), "tour1_usr1");
+		VLibTourGroupCommunicationSystemClient obj1 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", "Phong.tour1_usr1.Hanoi", "message one");
+		obj1.addConsumer(obj1.getConsumer(), obj1.getQueueName(), "*.tour1_usr1.#");
 		obj1.publish();
 		
-		VLibTourGroupCommunicationSystemClient obj2 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr2", "tour1_usr2", "message two");
-		obj2.addConsumer(obj2.getConsumer(), obj2.getQueueName(), "tour1_usr2");
+		VLibTourGroupCommunicationSystemClient obj2 = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr2", "Nga.tour1_usr2.NgheAn", "message two");
+		obj2.addConsumer(obj2.getConsumer(), obj2.getQueueName(), "*.tour1_usr2.#");
 		obj2.publish();
 		
 		Thread.sleep(3000);
