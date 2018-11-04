@@ -41,6 +41,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBException;
 
 import org.apache.commons.io.IOUtils;
 //import org.json.simple.JSONObject;
@@ -49,6 +50,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
+import vlibtour.vlibtour_visit_emulation.GPSPosition;
 
 /**
  * The bike stations emulated REST server.
@@ -56,49 +58,51 @@ import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
 
 @Path("/stations")
 public final class StationsRest {
-	/**
-	 * read all the stations from Paris
-	 * 
-	 * @return the list of stations in Paris
-	 */
+	
 	
 	private String fileName = "src/main/resources/paris.json";
-	private List<Station> stations;
+	private Stations stations;
 	
 	private void JsonToJV(final String fileName) throws IOException {
 		ObjectMapper mapper = new ObjectMapper(); //jackson class for converting from json to java 
-		List stationList; //JSON from file to Object
-		stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class)); // get the array of stations and convert to a list
-		stations= stationList;// create a Stations instance
+		List<Station> stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class)); // get the array of stations and convert to a list
+		stations = new Stations(stationList);// create a Stations instance
 	}
+	/**
+	 * print all bike stations in Paris
+	 * @return list of bike stations in Paris
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllSONStations() throws IOException {
-		String everything = " ";
-		FileInputStream inputStream = new FileInputStream(fileName);
-		try {
-		     everything = IOUtils.toString(inputStream);
-		} finally {
-		    inputStream.close();
-		}
-		return everything;
+	public Station[] getAllStations() throws IOException {
+		JsonToJV(fileName);
+		return (Station[]) stations.getStations().toArray();
 	}
 	
 	
 	/**
-	 * read all the properties from a specific station in Paris
 	 * 
 	 * @param number
-	 * 
-	 * @return the list of properties from give id
+	 * @return the station of the given number id
+	 * @throws JAXBException
+	 * @throws IOException
 	 */
 	@GET
 	@Path("/search/{number}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getOneStation(@PathParam("number") final long number)  throws IOException {
-		
-		return JsonPath.from(fileName).get();
-		
+	public Station getOneStation(@PathParam("number") final long number)  throws JAXBException, IOException {
+		JsonToJV(fileName);
+		return stations.lookupId(number);
+	}
+	
+	@GET
+	@Path("/searchNearest")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Station getNearestStation(@QueryParam("lat") final double latitude, @QueryParam("lng") double longitude) throws IOException {
+		JsonToJV(fileName);
+		GPSPosition destination = new GPSPosition(latitude, longitude);
+		return stations.findNearestStation(destination);
 	}
 }

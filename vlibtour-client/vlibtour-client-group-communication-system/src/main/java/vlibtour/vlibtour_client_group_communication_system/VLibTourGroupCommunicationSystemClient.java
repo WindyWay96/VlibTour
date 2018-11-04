@@ -16,11 +16,7 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
-/**
- * This class is the client application of the tourists.
- * 
- * @author Denis Conan
- */
+
 public class VLibTourGroupCommunicationSystemClient {
 	
 	private Connection connection;
@@ -34,12 +30,9 @@ public class VLibTourGroupCommunicationSystemClient {
 	private String tourID;
 	private String userID;
 	
-	private String EXCHANGE_NAME;
+	public static final String EXCHANGE_NAME =  "gr1_usr1";
 	private int nbMsgReceived = 0;
 	private static AtomicInteger totalNbMsgReceived = new AtomicInteger(0);
-	private static int c = 0;
-	private int me;
-	
 	/**
 	 * 
 	 * @param groupID
@@ -52,39 +45,59 @@ public class VLibTourGroupCommunicationSystemClient {
 		this.groupID = groupID;
 		this.tourID = tourID;
 		this.userID = userID;
+		this.queueName = tourID + "_" + userID; 
 		
-		this.EXCHANGE_NAME = groupID + "_" + userID;
-		this.queueName = tourID + "_" + userID;
-		this.bindingKey = "*." + this.queueName +".#"; 
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
 		connection = factory.newConnection();
 		channel = connection.createChannel();
 		channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
-		
 		this.routingKey = routingKey;
 		this.message = message;
+		
 	}
 	
-	public String addConsumer(Consumer consumer, String queueName, String bindingKey) throws IOException, TimeoutException {
-		channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
-		me = c++;
+	public void addConsumer(Consumer consumer, String queueName, String bindingKey) throws IOException, TimeoutException {
+		this.bindingKey = bindingKey;
+		channel.queueDeclare(queueName, true, true, true, null);
+		channel.queueBind(this.queueName, EXCHANGE_NAME, bindingKey);
+		
+		System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 		consumer = new DefaultConsumer(channel){
 			@Override
-			public void handleDelivery(final String consumeTag, final Envelope envelope, final AMQP.BasicProperties properties, final byte[] body) throws IOException {
+			public void handleDelivery(final String consumeTag, final Envelope envelope, 
+					final AMQP.BasicProperties properties, final byte[] body) throws IOException {
 				String message = new String(body, "UTF-8");
-				System.out.println("Received" + " " + envelope.getRoutingKey() + ":" + message + "");
+				System.out.println(" [x] Received '" + " " + envelope.getRoutingKey() + "':'" + message + "'");
 				nbMsgReceived++;
 				totalNbMsgReceived.incrementAndGet();
 			}
 		};
+		channel.basicConsume(queueName, true, consumer);
 		
-		return channel.basicConsume(queueName, true, consumer);
 	}
-	
+
+	public String getQueueName() {
+		return this.queueName;
+	}
+	public String getBindingKey() {
+		return this.bindingKey;
+	}
+//	public String getRoutingKey() {
+//		return this.routingKey;
+//	}
+	public int getNbMsgReceived() {
+		return nbMsgReceived;
+	}
+	public static int getTotalNbMsgReceived() {
+		return totalNbMsgReceived.get();
+	}
+	public Consumer getConsumer() {
+		return consumer;
+	}
 	public void publish() throws UnsupportedEncodingException, IOException {
 		channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes("UTF-8"));
-		System.out.println("Sent " + routingKey + ":" + message + "");
+		System.out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
 	}
 	
 	public void close() throws IOException, TimeoutException{
@@ -96,7 +109,7 @@ public class VLibTourGroupCommunicationSystemClient {
 		}
 	}
 	
-	private static String getRouting(final String[] strings) {
+	private static String getRoutingKey(final String[] strings) {
 		if (strings.length < 1) {
 			return "anonymous.info";
 		}
@@ -110,14 +123,14 @@ public class VLibTourGroupCommunicationSystemClient {
 		return Arrays.asList(strings).stream().skip(1).collect(Collectors.joining(" "));
 	}
 
-	public static void main(final String[] argv) throws Exception {
-		String routingKey = getRouting(argv);
+	public static void main(final String argc, final String[] argv) throws Exception {
+		String routingKey = getRoutingKey(argv);
 		String message = getMessage(argv);
 		
 		VLibTourGroupCommunicationSystemClient obj = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", routingKey, message);
-		obj.addConsumer(obj.consumer, obj.queueName, obj.bindingKey);
-		
+		obj.addConsumer(obj.consumer, obj.queueName, argc);
 		obj.publish();
+		Thread.sleep(4000);
 		obj.close();
 	}
 }

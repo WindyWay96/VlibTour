@@ -16,6 +16,8 @@ Contributor(s): Denis Conan
  */
 package vlibtour.vlibtour_bikestation.client;
 
+import java.awt.List;
+
 //import static org.junit.Assert.assertThat;
 
 import java.io.FileInputStream;
@@ -128,16 +130,18 @@ public final class BikeStationClient {
 		WebTarget service = client.target(uri);
 		
 		//Print all 
-//		System.out.println("all stations : \n"
-//				+ service.path("/stations/all").request().accept(MediaType.APPLICATION_JSON).get(String.class));
-//		
+		System.out.println("all stations : \n" + service.path("stations/all").request().accept(MediaType.APPLICATION_JSON).get(Station[].class));
+		
 
 		//Print a station with a given 
-		System.out.println("station with id 31705: \n"
-				+ service.path("/stations/search/31705").request().accept(MediaType.TEXT_PLAIN).get(String.class));
+		System.out.println("station with id 28002: \n" 
+				+ service.path("stations/search/28002").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
 		
-//		System.out.println("station with id 1020: \n"
-//				+ service.path("/stations/search/1020").queryParam("number", "1020").request().accept(MediaType.TEXT_PLAIN).get(String.class));
-//		
+		System.out.println("nearest station to Musee Grevin: \n "
+				+ service.path("stations/searchNearest").queryParam("lat", "48.8718").queryParam("lng", "2.3422").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
+		System.out.println("nearest station to Musee du Louvre: \n "
+				+ service.path("stations/searchNearest").queryParam("lat", "48.8606").queryParam("lng", "2.3376").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
+		
+		
 	}
 }

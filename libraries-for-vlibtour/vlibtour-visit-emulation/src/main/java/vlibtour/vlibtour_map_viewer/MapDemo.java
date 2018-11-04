@@ -78,7 +78,7 @@ public final class MapDemo {
 		GraphOfPositionsForEmulation.setStartingPosition("Avrel",
 				new Position(String.valueOf(2), new GPSPosition(48.869301, 2.3450524)));
 		GraphOfPositionsForEmulation.setStartingPosition("William",
-				new Position(String.valueOf(2), new GPSPosition(48.869301, 2.3450524)));
+				new Position(String.valueOf(2), new GPSPosition(40.7128, 74.0060)));
 		// set the path to the next POI
 		GraphOfPositionsForEmulation.setAPathTo("Joe",
 				new Position(String.valueOf(46), new GPSPosition(48.835436, 2.333569)));

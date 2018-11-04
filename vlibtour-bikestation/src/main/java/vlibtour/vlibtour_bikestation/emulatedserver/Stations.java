@@ -24,6 +24,7 @@ package vlibtour.vlibtour_bikestation.emulatedserver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,13 +34,15 @@ import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
+import vlibtour.vlibtour_visit_emulation.GPSPosition;
+
 /**
  * The stations REST server.
  */
 public class Stations {
 	
-	@XmlElementWrapper(name = "stations")
-	@XmlElement(name = "station")
+//	@XmlElementWrapper(name = "stations")
+//	@XmlElement(name = "station")
 	private List<Station> stations;
 
 	/**
@@ -47,25 +50,39 @@ public class Stations {
 	 */
 	public Stations() {
 	}
-
 	
 	public Stations(final List<Station> stations) {
 		this.stations = stations;
 	}
-
 	
+	public List<Station> getStations() {
+		return this.stations;
+	}
+
 	public void add(final Station station) {
 		stations.add(station);
 	}
 	
 	public Station lookupId(final long id) {
-		for (Station s : stations) {
-			if (s.sameNumber(id)) {
-				return s;
+		Station station;
+		for (Iterator<Station> it = stations.iterator(); it.hasNext(); ) {
+			station = it.next();
+			if (station.sameNumber(id)) {
+				return station;
 			}
 		}
 		return null;
 	}
+	
+	public Station findNearestStation(final GPSPosition destination) {
+		ArrayList<Double> distances = new ArrayList<Double>(stations.size());
+		for (Station station : stations) {
+			GPSPosition origin = new GPSPosition(station.getPosition().getLat(), station.getPosition().getLng());
+			distances.add(origin.distanceFrom(destination));
+		}
+		return stations.get(distances.indexOf(Collections.min(distances)));
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder output = new StringBuilder();

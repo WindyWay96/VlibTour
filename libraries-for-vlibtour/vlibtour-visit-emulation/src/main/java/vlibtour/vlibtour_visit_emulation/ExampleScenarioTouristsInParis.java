@@ -131,22 +131,19 @@ public final class ExampleScenarioTouristsInParis {
 		Position p19 = new Position(String.valueOf(19), new GPSPosition(48.860959, 2.335757), "Pyramide du Louvres",
 				null);
 		Position p20 = new Position(String.valueOf(20), new GPSPosition(48.858472, 2.348140), "41, rue de Rivoli");
-		Position p21 = new Position(String.valueOf(21), new GPSPosition(48.860148, 2.333168),
-				"6 quai François Mitterand");
+		Position p21 = new Position(String.valueOf(21), new GPSPosition(48.860148, 2.333168), "6 quai François Mitterand");
 		Position p22 = new Position(String.valueOf(22), new GPSPosition(48.855201, 2.347953), "Île de la Cité");
 		Position p23 = new Position(String.valueOf(23), new GPSPosition(48.859618, 2.333050), "Pont du Caroussel");
-		Position p24 = new Position(String.valueOf(24), new GPSPosition(48.853563, 2.347127),
-				"Parvis de la Cathédrale Notre Dame");
+		Position p24 = new Position(String.valueOf(24), new GPSPosition(48.853563, 2.347127), "Parvis de la Cathédrale Notre Dame");
 		Position p25 = new Position(String.valueOf(25), new GPSPosition(48.859562, 2.329248), "1, rue du Bac");
-		Position p26 = new Position(String.valueOf(26), new GPSPosition(48.858757, 2.332578), "Pont du Caroussel");
+		Position p26 = new Position(String.valueOf(26), new GPSPosition(48.858757, 2.332578),   "Pont du Caroussel");
 		Position p27 = new Position(String.valueOf(27), new GPSPosition(48.8543549, 2.3253203), "rue du Bac");
 		Position p28 = new Position(String.valueOf(28), new GPSPosition(48.852815, 2.346655), "43, rue de la Bucherie");
 		Position p29 = new Position(String.valueOf(29), new GPSPosition(48.856075, 2.340424), "1, rue de Nevers");
 		Position p30 = new Position(String.valueOf(30), new GPSPosition(48.847706, 2.3269443), "rue de Rennes");
 		Position p31 = new Position(String.valueOf(31), new GPSPosition(48.851410, 2.345840), "Square André-Lefèvre");
 		Position p32 = new Position(String.valueOf(32), new GPSPosition(48.853762, 2.344292), "Place Saint-Michel");
-		Position p33 = new Position(String.valueOf(33), new GPSPosition(48.843992, 2.323693),
-				"Église Notre Dame des Champs");
+		Position p33 = new Position(String.valueOf(33), new GPSPosition(48.843992, 2.323693), "Église Notre Dame des Champs");
 		Position p34 = new Position(String.valueOf(34), new GPSPosition(48.849617, 2.344853), "52, rue des Écoles");
 		Position p35 = new Position(String.valueOf(35), new GPSPosition(48.850380, 2.342704), "26 bd Saint-Michel");
 		Position p36 = new Position(String.valueOf(36), new GPSPosition(48.840605, 2.324314), "8 rue de la Gaité");
