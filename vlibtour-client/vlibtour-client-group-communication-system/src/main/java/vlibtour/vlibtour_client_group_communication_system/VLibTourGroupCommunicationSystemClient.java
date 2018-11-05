@@ -132,13 +132,12 @@ public class VLibTourGroupCommunicationSystemClient {
 		return Arrays.asList(strings).stream().skip(1).collect(Collectors.joining(" "));
 	}
 
-	public static void main(final String[] argv) throws Exception {
+	public static void main(final String argc, final String[] argv) throws Exception {
 		String routingKey = getRoutingKey(argv);
 		String message = getMessage(argv);
 		
 		VLibTourGroupCommunicationSystemClient obj = new VLibTourGroupCommunicationSystemClient("gr1", "tour1", "usr1", routingKey, message);
-		obj.addConsumer(obj.consumer, obj.queueName, obj.bindingKey);
-		
+		obj.addConsumer(obj.consumer, obj.queueName, argc);
 		obj.publish();
 		Thread.sleep(4000);
 		obj.close();
