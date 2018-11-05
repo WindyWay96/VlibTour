@@ -17,90 +17,183 @@ You should have received a copy of the GNU Lesser General Public License
 along with the muDEBS platform. If not, see <http://www.gnu.org/licenses/>.
 
 Initial developer(s): Denis Conan
-Contributor(s):
+Contributor(s): Nguyen Duyen Phuc <duyen.nguyen@telecom-sudparis.eu/>
+				Ngo Hoang Phong <?email/>
  */
 package vlibtour.vlibtour_tour_management.entity;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
-
-
+import vlibtour.vlibtour_visit_emulation.GPSPosition;
 /**
  * The entity bean defining a point of interest (POI). A {@link Tour} is a
  * sequence of points of interest.
  * 
  * @author Denis Conan
+ * @author Nguyen Duyen Phuc
+ * @author Ngo Hoang Phong
  */
+
+@Entity
+@Table(name="POIS")
+@NamedQueries({
+    @NamedQuery(
+        name = "findPOIById",
+        query = "from POIS p where p.poid = :namePOI"
+        ),
+    @NamedQuery(
+            name = "findPOIsByTourId",
+            query = "from POIS p where u.tour.id = :namePOI"
+            ),
+})
+
 public class POI implements Serializable {
 	/**
 	 * the serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	private int poid;
+	@Column(name = "POI_Name") private String namePOI;
+	@Column(name = "POI_Description") private String descriptionPOI;
+	@Column(name = "POI_Address") private String addressPOI;
+	@JoinColumn(name = "TourId") private Tour tour;
+	private GPSPosition gpsPosition;
 
+	/***************
+     * Constructor *
+     ***************/
+	
+	/**
+	 * gets id the POI.
+	 * 
+	 * @return id the POI.
+	 */
+
+	public int getPoid() {
+		return poid;
+	}
+
+	/**
+	 * sets the id of POI.
+	 * 
+	 * @param poid
+	 *            the new id of POI.
+	 */
+
+	public void setPoid(int poid) {
+		this.poid = poid;
+	}
+
+	
 	/**
 	 * gets the name of the POI.
 	 * 
 	 * @return the name of the POI.
 	 */
-	public String getName() {
-		throw new UnsupportedOperationException("Not implemented, yet.");
+	
+	public String getNamePOI() {
+		return namePOI;
 	}
 	
-	@Column(name = "latitude")
-    private double latitude;
+	/**
+	 * sets the name of POI.
+	 * 
+	 * @param namePOI
+	 *            the new name of POI.
+	 */
+	public void setNamePOI(String namePOI) {
+		this.namePOI = namePOI;
+	}
+	
+	/**
+	 * gets the description of the POI.
+	 * 
+	 * @return the description of the POI.
+	 */
+	public String getDescriptionPOI() {
+		return descriptionPOI;
+	}
 
-    @Column(name = "longitude")
-    private double longitude;
-    
-    POI() {
-        
+	/**
+	 * sets the description of POI.
+	 * 
+	 * @param namePOI
+	 *            the new description of POI.
+	 */
+	public void setDescriptionPOI(String descriptionPOI) {
+		this.descriptionPOI = descriptionPOI;
+	}
+		
+	/**
+	 * gets the address of the POI.
+	 * 
+	 * @return the address of the POI.
+	 */
+
+	public String getAddressPOI() {
+		return addressPOI;
+	}
+
+	/**
+	 * sets the address of POI.
+	 * 
+	 * @param namePOI
+	 *            the new address of POI.
+	 */
+	public void setAddressPOI(String addressPOI) {
+		this.addressPOI = addressPOI;
+	}
+	
+	/**
+	 * gets the tour.
+	 * 
+	 * @return tour.
+	 */
+	public Tour getTour() {
+        return tour;
     }
-    
-    public POI(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-    
-    /**
-     * stop_lat Required The stop_lat field contains the latitude of a stop or station. The field
-     * value must be a valid WGS 84 latitude.
-     *
-     * @return latitude coordinate for this location.
-     */
-    public double getLat() {
-        return this.latitude;
+	
+	/**
+	 * sets the tour.
+	 * 
+	 * @param tour
+	 *            the new tour.
+	 */
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
-    /**
-     * stop_lon Required The stop_lon field contains the longitude of a stop or station. The field
-     * value must be a valid WGS 84 longitude value from -180 to 180.
-     *
-     * @return longitude coordinate for this location.
-     */
-    public double getLng() {
-        return this.longitude;
-    }
+	/**
+	 * gets the GPS position of the POI.
+	 * 
+	 * @return the GPS position of the POI.
+	 */
+	public GPSPosition getGpsPosition() {
+		return gpsPosition;
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-    
-    @Override
-    public String toString() {
-        return new ReflectionToStringBuilder(this).build();
-    }
+	/**
+	 * sets the GPS position of POI.
+	 * 
+	 * @param namePOI
+	 *            the new GPS position of POI.
+	 */
+	public void setGpsPosition(GPSPosition gpsPosition) {
+		this.gpsPosition = gpsPosition;
+	}
 
-
+//	public String getName() {
+//	throw new UnsupportedOperationException("Not implemented, yet.");
+//}
+	
 }

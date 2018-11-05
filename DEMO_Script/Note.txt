@@ -1,0 +1,3 @@
+CONNECT 'jdbc:derby:VlibTourDB;create=true';
+
+run 'create_sampleDB.sql';

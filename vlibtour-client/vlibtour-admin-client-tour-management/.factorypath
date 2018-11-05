@@ -176,6 +176,6 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jboss/weld/se/weld-se-shaded/3.0.0.Final/weld-se-shaded-3.0.0.Final.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="/usr/lib/jvm/java-8-openjdk-amd64/jre/../lib/tools.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/usr/lib/jvm/jdk1.8.0_192/jre/../lib/tools.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

@@ -16,6 +16,9 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
+import vlibtour.vlibtour_map_viewer.MapDemo;
+import vlibtour.vlibtour_visit_emulation.GraphOfPositionsForEmulation;
+
 
 public class VLibTourGroupCommunicationSystemClient {
 	
@@ -116,9 +119,15 @@ public class VLibTourGroupCommunicationSystemClient {
 		return strings[0];
 	}
 	
+	/**
+	 * Get the GPS location of usere
+	 */
+	
 	private static String getMessage(final String[] strings) {
 		if (strings.length < 2) {
 			return "Hello World";
+			
+
 		}
 		return Arrays.asList(strings).stream().skip(1).collect(Collectors.joining(" "));
 	}

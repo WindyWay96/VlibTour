@@ -175,7 +175,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jboss/weld/se/weld-se-shaded/3.0.0.Final/weld-se-shaded-3.0.0.Final.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="/usr/lib/jvm/java-8-openjdk-amd64/jre/../lib/tools.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/usr/lib/jvm/jdk1.8.0_192/jre/../lib/tools.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jxmapviewer/jxmapviewer2/2.2/jxmapviewer2-2.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/openstreetmap/jmapviewer/jmapviewer/2.3/jmapviewer-2.3.jar" enabled="true" runInBatchMode="false"/>

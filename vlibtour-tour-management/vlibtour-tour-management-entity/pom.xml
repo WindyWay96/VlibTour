@@ -30,4 +30,15 @@ Contributor(s):
   <artifactId>vlibtour-tour-management-entity</artifactId>
   <packaging>jar</packaging>
   <name>vlibtour-tour-management-entity: the VLibTour Tour Management entity</name>
+  <dependencies>
+  
+   <!-- position libraries-for-vlibtour-->
+  
+  <dependency>
+  <groupId>eu.telecomsudparis.vlibtour.libraries-for-vlibtour</groupId>
+  <artifactId>vlibtour-visit-emulation</artifactId>
+   <version>1.0-SNAPSHOT</version>
+  </dependency>
+  
+  </dependencies>
 </project>

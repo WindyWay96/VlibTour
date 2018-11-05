@@ -37,6 +37,14 @@ Contributor(s):
       <artifactId>vlibtour-lobby-room-api</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    
+    <!-- position libraries-for-vlibtour-->
+    <dependency>
+  	<groupId>eu.telecomsudparis.vlibtour.libraries-for-vlibtour</groupId>
+  	<artifactId>vlibtour-visit-emulation</artifactId>
+   	<version>1.0-SNAPSHOT</version>
+  </dependency>
+    
     <!-- logging in rabbitmq-->
     <dependency>
       <groupId>org.slf4j</groupId>
