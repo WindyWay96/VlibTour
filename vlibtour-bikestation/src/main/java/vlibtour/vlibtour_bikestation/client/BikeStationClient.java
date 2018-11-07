@@ -134,7 +134,7 @@ public final class BikeStationClient {
 		
 
 		//Print a station with a given 
-		System.out.println("station with id 28002: \n" 
+		System.out.println("Input station Id to find that particular station: " 
 				+ service.path("stations/search/28002").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
 		
 		System.out.println("the nearest station to Musee Grevin: \n "

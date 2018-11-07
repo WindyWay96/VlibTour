@@ -225,7 +225,7 @@ this.additionalProperties.put(name, value);
 
 @Override
 public String toString() {
-return name + " " + number + " " + availableBikes; 
+return name  + " with the number of available bikes is: " + availableBikes; 
 }
 public boolean sameNumber(final long number) {
 	return this.number == number;
