@@ -38,7 +38,7 @@ public class GPSPosition {
 	 * the attribute for the delegation to the position.
 	 */
 	private Point point;
-
+	
 	/**
 	 * constructs a GPS position.
 	 * 

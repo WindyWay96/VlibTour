@@ -121,4 +121,5 @@ public final class MapHelper {
 		dot.setLat(GraphOfPositionsForEmulation.getCurrentPosition(dot.getName()).getGpsLocation().getLatitude());
 		dot.setLon(GraphOfPositionsForEmulation.getCurrentPosition(dot.getName()).getGpsLocation().getLongitude());
 	}
+	
 }

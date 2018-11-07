@@ -16,8 +16,12 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 
 public class VLibTourGroupCommunicationSystemClient {
+	PasswordGenerator gn = new PasswordGenerator();
 	
 	private Connection connection;
     private Consumer consumer;
@@ -27,9 +31,9 @@ public class VLibTourGroupCommunicationSystemClient {
 	private String queueName;
 	private String bindingKey;
 	private String groupID;
-	private String tourID;
+	private String tourID; 
 	private String userID;
-	
+	//public final String url = "amqp://" + userID + ":" + gn.generatePassword(4, CharacterRule(EnglishCharacterData.LowerCase, 4) + "@" +tourID + ":" +  + "/" + vhost;
 	public static final String EXCHANGE_NAME =  "gr1_usr1";
 	private int nbMsgReceived = 0;
 	private static AtomicInteger totalNbMsgReceived = new AtomicInteger(0);
@@ -46,7 +50,6 @@ public class VLibTourGroupCommunicationSystemClient {
 		this.tourID = tourID;
 		this.userID = userID;
 		this.queueName = tourID + "_" + userID; 
-		
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
 		connection = factory.newConnection();

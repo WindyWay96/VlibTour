@@ -44,6 +44,11 @@ Contributor(s):
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
+      <groupId>eu.telecomsudparis.vlibtour</groupId>
+      <artifactId>vlibtour-bikestation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <!-- for explanations about scope=provided, please see:

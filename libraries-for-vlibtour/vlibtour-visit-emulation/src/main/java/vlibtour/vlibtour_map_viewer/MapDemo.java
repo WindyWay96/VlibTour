@@ -24,16 +24,25 @@ package vlibtour.vlibtour_map_viewer;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.json.Json;
+
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vlibtour.vlibtour_visit_emulation.ExampleScenarioTouristsInParis;
 import vlibtour.vlibtour_visit_emulation.GPSPosition;
 import vlibtour.vlibtour_visit_emulation.GraphOfPositionsForEmulation;
 import vlibtour.vlibtour_visit_emulation.Position;
 
+import vlibtour.vlibtour_bikestation.emulatedserver.Stations;
+import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
 /**
  * This class contains a demonstration of the utility methods for displaying
  * POIs and tourists on a Open Street Map.
@@ -42,19 +51,33 @@ import vlibtour.vlibtour_visit_emulation.Position;
  * @author Denis Conan
  */
 public final class MapDemo {
-
+	
+	private static String fileName = "src/main/resources/paris.json";
+	private Stations stations1;
+	private Stations stations2;
+	private Stations stations3;
+	private List<Stations> stationsList;
 	/**
 	 * private constructor to avoid instantiation.
 	 */
 	private MapDemo() {
 	}
-
+	
+	
+	private Stations JsonToJV(final String fileName) throws IOException {
+		ObjectMapper mapper = new ObjectMapper(); //jackson class for converting from json to java 
+		List<Station> stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class)); // get the array of stations and convert to a list
+		Stations stations = new Stations(stationList);// create a Stations instance
+		return stations;
+	}
+	
 	/**
 	 * the main of the example.
 	 * 
 	 * @param args there is no command line arguments.
 	 * @throws Exception pb in using OSM cache...
 	 */
+	
 	public static void main(final String[] args) throws Exception {
 		// create a map (JMapViewer) centered between "Musée Grévin" and "Catacombes"
 		// with a 14 zoom level
@@ -67,6 +90,30 @@ public final class MapDemo {
 		MapHelper.addMarkerDotOnMap(map, 48.871799, 2.342355, Color.BLACK, font, "Musée Grevin");
 		MapHelper.addMarkerDotOnMap(map, 48.860959, 2.335757, Color.BLACK, font, "Pyramide du Louvres");
 		MapHelper.addMarkerDotOnMap(map, 48.833566, 2.332416, Color.BLACK, font, "Les catacombes");
+		
+		MapDemo mapDemo = new MapDemo();
+		mapDemo.stations1 = mapDemo.JsonToJV(fileName);
+		mapDemo.stations2 = mapDemo.JsonToJV(fileName);
+		mapDemo.stations3 = mapDemo.JsonToJV(fileName);
+		mapDemo.stationsList.add(mapDemo.stations1);
+		GPSPosition poi1 = new GPSPosition(48.871799, 2.342355);	
+		GPSPosition poi2 = new GPSPosition(48.860959, 2.335757);
+		GPSPosition poi3 = new GPSPosition(48.833566, 2.332416);
+		
+		mapDemo.stations1.proxyStations(poi1);
+		mapDemo.stations2.proxyStations(poi2);
+		mapDemo.stations3.proxyStations(poi3);
+		
+		for(Station s : mapDemo.stations1.getStations()) {
+			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
+		}
+		for(Station s : mapDemo.stations2.getStations()) {
+			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
+		}
+		for(Station s : mapDemo.stations3.getStations()) {
+			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
+		}
+		
 		// Set the visit (only the last POI on path 47=catacombes)
 		List<Position> visit = new ArrayList<>();
 		visit.add(new Position(String.valueOf(47), null));
@@ -90,6 +137,7 @@ public final class MapDemo {
 		MapMarkerDot joeDot = MapHelper.addTouristOnMap(map, Color.RED, font, "Joe");
 		MapMarkerDot avrelDot = MapHelper.addTouristOnMap(map, Color.GREEN, font, "Avrel");
 		MapMarkerDot williamDot = MapHelper.addTouristOnMap(map, Color.YELLOW, font, "William");
+		
 		// wait for painting the map, not necessary with the cache
 		// Thread.sleep(15000);
 		System.out.println("\nDeparture...\n");

@@ -137,11 +137,18 @@ public final class BikeStationClient {
 		System.out.println("station with id 28002: \n" 
 				+ service.path("stations/search/28002").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
 		
-		System.out.println("nearest station to Musee Grevin: \n "
+		System.out.println("the nearest station to Musee Grevin: \n "
 				+ service.path("stations/searchNearest").queryParam("lat", "48.8718").queryParam("lng", "2.3422").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
-		System.out.println("nearest station to Musee du Louvre: \n "
+		System.out.println("the nearest station to Musee du Louvre: \n "
 				+ service.path("stations/searchNearest").queryParam("lat", "48.8606").queryParam("lng", "2.3376").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
 		
+		System.out.println("the bike station nearest to Musee Grevin has: \n"
+				+ service.path("stations/getBikes").queryParam("lat", "48.8718").queryParam("lng", "2.3422").request().accept(MediaType.TEXT_PLAIN).get(String.class));
 		
+		System.out.println("the station with the least number of available bikes: \n"
+				+ service.path("stations/minValue").request().accept(MediaType.APPLICATION_JSON).get(Station.class));
+		
+		System.out.println("nearest stations to Musee du Louvre: \n"
+				+ service.path("stations/proxyStations").queryParam("lat", "48.8606").queryParam("lng", "2.3376").request().accept(MediaType.APPLICATION_JSON).get(Station[].class));
 	}
 }

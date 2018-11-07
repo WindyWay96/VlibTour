@@ -97,6 +97,13 @@ public final class StationsRest {
 		return stations.lookupId(number);
 	}
 	
+	/**
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 * @throws IOException
+	 */
 	@GET
 	@Path("/searchNearest")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -104,5 +111,44 @@ public final class StationsRest {
 		JsonToJV(fileName);
 		GPSPosition destination = new GPSPosition(latitude, longitude);
 		return stations.findNearestStation(destination);
+	}
+	/**
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 * @throws IOException
+	 */
+	@GET
+	@Path("/proxyStations")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Station[] proxyStations(@QueryParam("lat") final double latitude, @QueryParam("lng") double longitude) throws IOException {
+		JsonToJV(fileName);
+		GPSPosition destination = new GPSPosition(latitude, longitude);
+		stations.proxyStations(destination);
+		Station[] list = new Station[5];
+		for (int i = 0; i < 5; i++) {
+			list[i] = stations.getStations().get(i);
+		}
+		return list;
+		
+	}
+	
+	@GET
+	@Path("/getBikes")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getNbBikesAv(@QueryParam("lat") final double latitude, @QueryParam("lng") double longitude) throws IOException {
+		JsonToJV(fileName);
+		GPSPosition destination = new GPSPosition(latitude, longitude);
+		Station station = stations.findNearestStation(destination);
+		return "number of available bikes" + station.getAvailableBikes();
+	}
+	
+	@GET
+	@Path("/minValue")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Station getMinBike() throws IOException {
+		JsonToJV(fileName);
+		return stations.getStationWithMinNbBike();
 	}
 }

@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import vlibtour.vlibtour_tour_management.entity.POI;
+import vlibtour.vlibtour_visit_emulation.GPSPosition;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 "number",
@@ -229,5 +232,9 @@ return name + " " + number;
 
 public boolean sameNumber(final long number) {
 	return this.number == number;
+}
+public double getDistanceFrom(GPSPosition position) {
+	GPSPosition origin = new GPSPosition(this.getPosition().getLat(), this.getPosition().getLng());
+	return origin.distanceFrom(position);
 }
 }

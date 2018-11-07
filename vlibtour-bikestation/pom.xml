@@ -26,11 +26,11 @@ Contributor(s): Denis Conan
     <groupId>eu.telecomsudparis.vlibtour</groupId>
     <artifactId>vlibtour</artifactId>
     <version>1.0-SNAPSHOT</version>
-  </parent> 
+  </parent>
+  
   <artifactId>vlibtour-bikestation</artifactId>
   <packaging>jar</packaging>
   <name>vlibtour-bikestation: the VlibTour Bikestation service (example client and emulation)</name>
- 
   <dependencies>
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
@@ -41,6 +41,7 @@ Contributor(s): Denis Conan
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
     </dependency>
+   
     <dependency> <!-- for IOUtils -->
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
@@ -117,4 +118,6 @@ Contributor(s): Denis Conan
       </plugin>
     </plugins>
   </build>
+  <groupId>eu.telecomsudparis.vlibtour.vlibtour-bik</groupId>
+  <version>1.0-SNAPSHOT</version>
 </project>
