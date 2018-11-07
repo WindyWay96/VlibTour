@@ -3,7 +3,7 @@
 # killall java # to think about the possibility of processes from old executions!
 
 # clean up the domain and the database
-asadmin undeploy vlibtour-tour-management-bean
+#asadmin undeploy vlibtour-tour-management-bean
 asadmin stop-database
 asadmin stop-domain domain1
 # start the domain and the database, and deploy the tour management bean

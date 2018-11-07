@@ -26,6 +26,7 @@ import java.util.Set;
 
 import javax.ejb.Remote;
 
+import vlibtour.vlibtour_tour_management.entity.POI;
 import vlibtour.vlibtour_tour_management.entity.Tour;
 
 /**
@@ -49,4 +50,7 @@ public interface VlibTourTourManagement {
 	String createPOI (final int poid, final String poiName, final String poiDescription,
 			final String gpsLocation, final String duration);
 	String addPoiToTour(final int tourID, final int poid);
+	List <POI> listPOIs();
+	POI findPOI(int Id);
+	
 }

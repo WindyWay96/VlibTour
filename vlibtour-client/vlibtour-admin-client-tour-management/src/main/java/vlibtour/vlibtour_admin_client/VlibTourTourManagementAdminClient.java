@@ -86,6 +86,9 @@ public class VlibTourTourManagementAdminClient {
 		
 		System.out.println(dash);
 
+		// Get POI
+		System.out.println("List of POIs " + sb.listPOIs());
+		System.out.println(dash);
 		
 		// Add a POI with poid = 20 to a tour with tourID = 10
 		System.out.println("POI 1 has been added to tour 1 " + sb.addPoiToTour(10, 20));
@@ -98,6 +101,13 @@ public class VlibTourTourManagementAdminClient {
 		// List tour
 		System.out.println("List of the tours " + sb.findAllTours());
 		System.out.println(dash);
+		
+		// Get info of a POI
+		System.out.println("INFO of POI 1: " + sb.findPOI(20));
+		System.out.println(dash);
+		
+
+		
 
 }  catch(Exception e) {
 	e.printStackTrace();

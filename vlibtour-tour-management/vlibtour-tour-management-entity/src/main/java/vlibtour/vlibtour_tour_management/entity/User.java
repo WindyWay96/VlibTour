@@ -62,7 +62,6 @@ public class User implements Serializable {
 	   name="REGISTERS",
 	   joinColumns=@JoinColumn(name="UserID"),
 	   inverseJoinColumns=@JoinColumn(name="GroupID"))
-	//private List<Group> groups;
 	private Collection<Group> groups = new ArrayList<Group>();
 	
 	@Column(name = "User_Name")

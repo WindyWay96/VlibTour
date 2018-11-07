@@ -161,8 +161,8 @@ public class POI implements Serializable {
 		this.duration = duration;
 	}
 
-//	public String getName() {
-//	throw new UnsupportedOperationException("Not implemented, yet.");
-//}
+	public String toString() {
+        return namePOI + " " + descriptionPOI + " " + duration;
+    }
 
 }
