@@ -56,7 +56,6 @@ public final class MapDemo {
 	private Stations stations1;
 	private Stations stations2;
 	private Stations stations3;
-	private List<Stations> stationsList;
 	/**
 	 * private constructor to avoid instantiation.
 	 */
@@ -85,7 +84,7 @@ public final class MapDemo {
 		// src/main/resources/osm-mapnik
 		BasicMap map = MapHelper.createMapWithCenterAndZoomLevel("src/main/resources/osm-mapnik/", 48.851412, 2.343166,
 				14);
-		Font font = new Font("name", Font.BOLD, 20);
+		Font font = new Font("name", Font.PLAIN, 20);
 		// Add markers for the POIs in the tour
 		MapHelper.addMarkerDotOnMap(map, 48.871799, 2.342355, Color.BLACK, font, "Musée Grevin");
 		MapHelper.addMarkerDotOnMap(map, 48.860959, 2.335757, Color.BLACK, font, "Pyramide du Louvres");
@@ -95,7 +94,7 @@ public final class MapDemo {
 		mapDemo.stations1 = mapDemo.JsonToJV(fileName);
 		mapDemo.stations2 = mapDemo.JsonToJV(fileName);
 		mapDemo.stations3 = mapDemo.JsonToJV(fileName);
-		mapDemo.stationsList.add(mapDemo.stations1);
+		
 		GPSPosition poi1 = new GPSPosition(48.871799, 2.342355);	
 		GPSPosition poi2 = new GPSPosition(48.860959, 2.335757);
 		GPSPosition poi3 = new GPSPosition(48.833566, 2.332416);
@@ -103,15 +102,15 @@ public final class MapDemo {
 		mapDemo.stations1.proxyStations(poi1);
 		mapDemo.stations2.proxyStations(poi2);
 		mapDemo.stations3.proxyStations(poi3);
+		List<Stations> stationsList = new ArrayList<Stations>();
+		stationsList.add(mapDemo.stations1);
+		stationsList.add(mapDemo.stations2);
+		stationsList.add(mapDemo.stations3);
 		
-		for(Station s : mapDemo.stations1.getStations()) {
-			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
-		}
-		for(Station s : mapDemo.stations2.getStations()) {
-			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
-		}
-		for(Station s : mapDemo.stations3.getStations()) {
-			MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getAvailableBikes()+" ");
+		for(Stations ss : stationsList) {
+			for(Station s : ss.getStations()) {
+				MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), Color.BLUE, font, s.getName() + " " + s.getAvailableBikes());
+			}
 		}
 		
 		// Set the visit (only the last POI on path 47=catacombes)
