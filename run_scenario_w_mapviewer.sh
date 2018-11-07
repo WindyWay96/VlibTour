@@ -9,6 +9,7 @@ asadmin stop-domain domain1
 # start the domain and the database, and deploy the tour management bean
 asadmin start-domain domain1
 asadmin start-database
+
 asadmin deploy vlibtour-tour-management/vlibtour-tour-management-bean/target/vlibtour-tour-management-bean.jar
 
 # source the script and export in the script => definitions usable in the sequel
@@ -17,6 +18,7 @@ asadmin deploy vlibtour-tour-management/vlibtour-tour-management-bean/target/vli
 # populate the database with the POIs and the tours
 ./Scripts/admin_client_tour_management.sh populate toursAndPOIs
 
+: '
 # clean up the rabbitmq server
 rabbitmqctl stop
 # start the rabbitmq server
@@ -58,3 +60,4 @@ rabbitmqctl stop
 asadmin undeploy vlibtour-tour-management-bean
 asadmin stop-database
 asadmin stop-domain domain1
+'

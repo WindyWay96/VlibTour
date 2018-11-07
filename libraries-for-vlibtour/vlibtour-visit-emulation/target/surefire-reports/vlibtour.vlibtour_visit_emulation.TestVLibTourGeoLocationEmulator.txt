@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: vlibtour.vlibtour_visit_emulation.TestVLibTourGeoLocationEmulator
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.27 sec - in vlibtour.vlibtour_visit_emulation.TestVLibTourGeoLocationEmulator
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.33 sec - in vlibtour.vlibtour_visit_emulation.TestVLibTourGeoLocationEmulator

@@ -22,14 +22,25 @@ Contributor(s):
 package vlibtour.vlibtour_tour_management.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+
 
 /**
  * The entity bean defining a tour in the VLibTour case study. A tour is a
@@ -41,95 +52,120 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="TOURS")
-@NamedQueries({
-    @NamedQuery(
-        name = "findTourById",
-        query = "from TOURS t where t.tourID = :tourName"
-        ),
-    @NamedQuery(
-            name = "checkTourStatus",
-            query = "from TOURS t where t.tourID = :tourStatus"
-            ),
-})
+//@Table (name="TOURS")
+//@NamedQueries({
+//	@NamedQuery(
+//	        name = "listSetOfTours",
+//	        query = "select tourID, tourName from tours"
+//	        ),
+//    @NamedQuery(
+//        name = "findTour",
+//        query = "select tourName from TOURS t where t.tourID = :tourName"
+//        ),
+//    @NamedQuery(
+//            name = "checkTourStatus",
+//            query = "from TOURS t where t.tourID = :tourStatus"
+//            ),
+//    @NamedQuery(
+//            name = "findDateOfTour",
+//            query = "from TOURS t where t.tourDate.dateID = :tourDate"
+//            ),
+//})
 
 public class Tour implements Serializable {
 	/**
 	 * the serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
+	@Column (name = "TourID")
 	private int tourID;
 	
-	@JoinColumn(name = "dateId") private int dateID;
-	
-	@Column (name = "TourName") private String tourName;
-	@Column (name = "TourDescription")private String tourDescription;
-	@Column (name = "TourStatus") private String tourStatus;
-	
-	
-	/***************
-     * Constructor *
-     ***************/
-	
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="TourID", referencedColumnName="GroupID")   /////?????????????/////
+	private Group group;  	
 
-	/**
-	 * gets the name of the tour.
-	 * 
-	 * @return the name of the tour.
-	 */
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tour")
+	private  Collection<POI> pois  = new ArrayList<POI>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DateId")
+	private TourDate tourDate;
+
+	@Column (name = "TourName")
+	private String tourName;
+	@Column(name = "TourDescription")
+	private String tourDescription;
+	@Column (name = "TourStatus")
+	private String tourStatus;
+
+	/***************
+	 * Constructor *
+	 ***************/
+
 	public String getName() {
 		throw new UnsupportedOperationException("Not implemented, yet.");
 	}
-
 
 	public int getTourID() {
 		return tourID;
 	}
 
-
 	public void setTourID(int tourID) {
 		this.tourID = tourID;
 	}
-
 
 	public String getTourName() {
 		return tourName;
 	}
 
-
 	public void setTourName(String tourName) {
 		this.tourName = tourName;
 	}
-
 
 	public String getTourDescription() {
 		return tourDescription;
 	}
 
-
 	public void setTourDescription(String tourDescription) {
 		this.tourDescription = tourDescription;
 	}
-
 
 	public String getTourStatus() {
 		return tourStatus;
 	}
 
-
 	public void setTourStatus(String tourStatus) {
 		this.tourStatus = tourStatus;
 	}
 
-
-	public int getDateID() {
-		return dateID;
+	public TourDate getTourDate() {
+		return tourDate;
 	}
 
-
-	public void setDateID(int dateID) {
-		this.dateID = dateID;
+	public void setTourDate(TourDate tourDate) {
+		this.tourDate = tourDate;
 	}
+	
+	public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+    
+    public  Collection<POI> getPOIS(){
+		return pois;
+	}
+	
+    public void setPOIs(final Collection<POI> newValue) {
+		this.pois = newValue;
+	}
+    
+    public String toString() {
+        return tourID + " " + tourName + " " + tourStatus;
+    }
+
 }

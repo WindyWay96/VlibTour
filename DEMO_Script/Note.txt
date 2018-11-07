@@ -1,3 +1,15 @@
 CONNECT 'jdbc:derby:VlibTourDB;create=true';
 
+connect 'jdbc:derby://localhost:1527/sun-appserv-samples';
+
 run 'create_sampleDB.sql';
+
+vim ~/MWInstallation/glassfish5/glassfish/domains/domain1/logs/server.log
+
+/////
+
+(. java8;asadmin start-domain domain1; asadmin deploy vlibtour-tour-management/vlibtour-tour-management-bean/target/vlibtour-tour-management-bean.jar)
+
+
+ java -classpath $CLASSPATH:vlibtour-tour-management/vlibtour-tour-management-bean/target/vlibtour-tour-management-bean.jar:vlibtour-tour-management/vlibtour-tour-management-api/target/vlibtour-tour-management-api-1.0-SNAPSHOT.jar:vlibtour-client/vlibtour-admin-client-tour-management/target/vlibtour-admin-client-tour-management-1.0-SNAPSHOT.jar vlibtour-client/vlibtour-admin-client-tour-management/src/main/java/vlibtour/vlibtour_admin_client/VlibTourTourManagementAdminClient.java
+

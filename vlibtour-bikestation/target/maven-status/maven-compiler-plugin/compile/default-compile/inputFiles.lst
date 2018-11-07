@@ -1,8 +1,8 @@
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/StationsRest.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/Main.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/generated_from_json/Station.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/generated_from_json/Station.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/Stations.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/generated_from_json/Position.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/generated_from_json/Position.java
-/home/phuc/workspace/csc-mw-project-vlibtour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/BikeStationClient.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/Main.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/Stations.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/generated_from_json/Position.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/BikeStationClient.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/generated_from_json/Position.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/generated_from_json/Station.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/client/generated_from_json/Station.java
+/home/phuc/workspace/phucV/VlibTour/vlibtour-bikestation/src/main/java/vlibtour/vlibtour_bikestation/emulatedserver/StationsRest.java

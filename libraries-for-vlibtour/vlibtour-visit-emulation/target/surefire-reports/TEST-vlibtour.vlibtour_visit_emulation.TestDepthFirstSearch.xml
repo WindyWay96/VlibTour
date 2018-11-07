@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.183" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.145" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.8.0_192/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.192-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/phuc/workspace/phucV/VlibTour/libraries-for-vlibtour"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/phuc/workspace/phucV/VlibTour"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/phuc/workspace/phucV/VlibTour/libraries-for-vlibtour"/>
+    <property name="user.dir" value="/home/phuc/workspace/phucV/VlibTour"/>
     <property name="java.runtime.version" value="1.8.0_192-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/jdk1.8.0_192/jre/lib/endorsed"/>
@@ -61,12 +61,12 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testManyPathsWithACycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.016"/>
+  <testcase name="testManyPathsWithACycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.008"/>
   <testcase name="testTwoPathsWithACycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
   <testcase name="testOnePathWithACycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
-  <testcase name="testOnePathWithoutAnyCycle2" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.003"/>
+  <testcase name="testOnePathWithoutAnyCycle2" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0"/>
   <testcase name="testNoPathToUnknownDestination" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
-  <testcase name="testOnePathWithoutAnyCycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.003"/>
-  <testcase name="testManyPathsWithACycle2" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
-  <testcase name="testNoPathFromUnknownDeparture" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
+  <testcase name="testOnePathWithoutAnyCycle" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0.001"/>
+  <testcase name="testManyPathsWithACycle2" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0"/>
+  <testcase name="testNoPathFromUnknownDeparture" classname="vlibtour.vlibtour_visit_emulation.TestDepthFirstSearch" time="0"/>
 </testsuite>

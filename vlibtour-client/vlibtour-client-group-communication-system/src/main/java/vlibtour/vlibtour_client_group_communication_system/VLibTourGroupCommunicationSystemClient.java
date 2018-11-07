@@ -120,7 +120,7 @@ public class VLibTourGroupCommunicationSystemClient {
 	}
 	
 	/**
-	 * Get the GPS location of usere
+	 * Get the GPS location of user
 	 */
 	
 	private static String getMessage(final String[] strings) {
