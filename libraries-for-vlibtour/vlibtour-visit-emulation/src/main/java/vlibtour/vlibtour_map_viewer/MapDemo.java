@@ -52,25 +52,10 @@ import vlibtour.vlibtour_bikestation.emulatedserver.generated_from_json.Station;
  */
 public final class MapDemo {
 	
-	private static String fileName = "src/main/resources/paris.json";
-	private Stations stations1;
-	private Stations stations2;
-	private Stations stations3;
-	private Stations stations4;
-	private Stations stations6;
-	
 	/**
 	 * private constructor to avoid instantiation.
 	 */
 	private MapDemo() {
-	}
-	
-	
-	private Stations JsonToJV(final String fileName) throws IOException {
-		ObjectMapper mapper = new ObjectMapper(); //jackson class for converting from json to java 
-		List<Station> stationList = Arrays.asList(mapper.readValue(new File(fileName), Station[].class)); // get the array of stations and convert to a list
-		return new Stations(stationList);// create a Stations instance
-		
 	}
 	
 	/**
@@ -93,68 +78,6 @@ public final class MapDemo {
 		MapHelper.addMarkerDotOnMap(map, 48.860959, 2.335757, Color.BLACK, font, "Pyramide du Louvres");
 		MapHelper.addMarkerDotOnMap(map, 48.833566, 2.332416, Color.BLACK, font, "Les catacombes");
 		
-		MapDemo mapDemo = new MapDemo();
-		mapDemo.stations1 = mapDemo.JsonToJV(fileName);
-		mapDemo.stations2 = mapDemo.JsonToJV(fileName);
-		mapDemo.stations3 = mapDemo.JsonToJV(fileName);
-		mapDemo.stations4 = mapDemo.JsonToJV(fileName);
-		
-		mapDemo.stations6 = mapDemo.JsonToJV(fileName);
-		
-		GPSPosition poi1 = new GPSPosition(48.871799, 2.342355);	
-		GPSPosition poi2 = new GPSPosition(48.860959, 2.335757);
-		GPSPosition poi3 = new GPSPosition(48.833566, 2.332416);
-		
-		
-		
-		// find stations near the users
-		GPSPosition p1 = new GPSPosition(48.852424, 2.321045);
-	
-				
-		
-		
-		mapDemo.stations1.proxyStations(poi1);
-		mapDemo.stations2.proxyStations(poi2);
-		mapDemo.stations3.proxyStations(poi3);
-		mapDemo.stations4.proxyStations(p1);
-	
-		
-		List<Stations> stationsList = new ArrayList<Stations>();
-		stationsList.add(mapDemo.stations1);
-		stationsList.add(mapDemo.stations2);
-		stationsList.add(mapDemo.stations3);
-		stationsList.add(mapDemo.stations4);
-		
-		
-		for(int i = 0; i < stationsList.size(); i++) {
-			switch(i) {
-				case 0 :
-					for (Station s : stationsList.get(i).getStations()) {
-						MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), 
-								Color.BLUE, font, "\n" + Double.toString(Math.round(s.getDistanceFrom(poi1))) + "m with " + s.getAvailableBikes() + " bikes available");
-					}
-					break;
-				
-				case 1 :
-					for (Station s : stationsList.get(i).getStations()) {
-						MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), 
-								Color.BLUE, font, "\n" + Double.toString(Math.round(s.getDistanceFrom(poi2))) + "m with " + s.getAvailableBikes() + " bikes available");
-					}
-					break;
-				case 2 :
-					for (Station s : stationsList.get(i).getStations()) {
-						MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), 
-								Color.BLUE, font, "\n" + Double.toString(Math.round(s.getDistanceFrom(poi3))) + "m with " + s.getAvailableBikes() + " bikes available");
-					}
-					break;
-				case 3 :
-					for (Station s : stationsList.get(i).getStations()) {
-						MapHelper.addMarkerDotOnMap(map, s.getPosition().getLat(), s.getPosition().getLng(), 
-								Color.BLUE, font, "\n" + Double.toString(Math.round(s.getDistanceFrom(p1))) + "m with " + s.getAvailableBikes() + " bikes available");
-					}
-					break;
-			}
-		}
 		// Set the visit (only the last POI on path 47=catacombes)
 		List<Position> visit = new ArrayList<>();
 		visit.add(new Position(String.valueOf(47), null));
