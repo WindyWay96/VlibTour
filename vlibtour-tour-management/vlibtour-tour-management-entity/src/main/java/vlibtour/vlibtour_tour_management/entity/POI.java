@@ -22,15 +22,18 @@ Contributor(s):
 package vlibtour.vlibtour_tour_management.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import vlibtour.vlibtour_visit_emulation.GPSPosition;
+
 /**
  * The entity bean defining a point of interest (POI). A {@link Tour} is a
  * sequence of points of interest.
@@ -41,151 +44,124 @@ import vlibtour.vlibtour_visit_emulation.GPSPosition;
  */
 
 @Entity
-@Table(name="POIS")
-@NamedQueries({
-    @NamedQuery(
-        name = "findPOIById",
-        query = "from POIS p where p.poid = :namePOI"
-        ),
-    @NamedQuery(
-            name = "findPOIsByTourId",
-            query = "from POIS p where u.tour.id = :namePOI"
-            ),
-})
+//@Table(name="POIS")
+//@NamedQueries({
+//    @NamedQuery(
+//        name = "findPOI",
+//        query = "select..."
+//        ),
+//    @NamedQuery(
+//            name = "findPOIsByTourId",
+//            query = "from POIS p where u.tour.id = :namePOI"
+//            ),
+//})
 
 public class POI implements Serializable {
 	/**
 	 * the serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
+	@Column
 	private int poid;
-	@Column(name = "POI_Name") private String namePOI;
-	@Column(name = "POI_Description") private String descriptionPOI;
-	@Column(name = "POI_Address") private String addressPOI;
-	@JoinColumn(name = "TourId") private Tour tour;
-	private GPSPosition gpsPosition;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TourId")
+	private Tour tour;
+	
+	@Column(name = "POI_Name")
+	private String namePOI;
+	@Column(name = "POI_Description")
+	private String descriptionPOI;
+	@Column(name = "POI_Address")
+	private String addressPOI;
+	@Column(name = "Duration")
+	private String duration;
+	
+	/* 
+		For simplification, we choose String as data type for "GPSPosition"
+		only in this EJB component.The reason is Derby DB not fully 
+		support spatial data type. The other components will use gps data type
+		provided in library.
+	*/
+	@Column(name = "GPSPosition")
+	private String gpsPosition;
 
 	/***************
-     * Constructor *
-     ***************/
-	
-	/**
-	 * gets id the POI.
-	 * 
-	 * @return id the POI.
-	 */
+	 * Constructor *
+	 ***************/
+
 
 	public int getPoid() {
 		return poid;
 	}
 
-	/**
-	 * sets the id of POI.
-	 * 
-	 * @param poid
-	 *            the new id of POI.
-	 */
+	
 
 	public void setPoid(int poid) {
 		this.poid = poid;
 	}
 
 	
-	/**
-	 * gets the name of the POI.
-	 * 
-	 * @return the name of the POI.
-	 */
-	
+
 	public String getNamePOI() {
 		return namePOI;
 	}
+
 	
-	/**
-	 * sets the name of POI.
-	 * 
-	 * @param namePOI
-	 *            the new name of POI.
-	 */
 	public void setNamePOI(String namePOI) {
 		this.namePOI = namePOI;
 	}
+
 	
-	/**
-	 * gets the description of the POI.
-	 * 
-	 * @return the description of the POI.
-	 */
 	public String getDescriptionPOI() {
 		return descriptionPOI;
 	}
 
-	/**
-	 * sets the description of POI.
-	 * 
-	 * @param namePOI
-	 *            the new description of POI.
-	 */
+	
 	public void setDescriptionPOI(String descriptionPOI) {
 		this.descriptionPOI = descriptionPOI;
 	}
-		
-	/**
-	 * gets the address of the POI.
-	 * 
-	 * @return the address of the POI.
-	 */
+
 
 	public String getAddressPOI() {
 		return addressPOI;
 	}
 
-	/**
-	 * sets the address of POI.
-	 * 
-	 * @param namePOI
-	 *            the new address of POI.
-	 */
+	
 	public void setAddressPOI(String addressPOI) {
 		this.addressPOI = addressPOI;
 	}
-	
-	/**
-	 * gets the tour.
-	 * 
-	 * @return tour.
-	 */
-	public Tour getTour() {
-        return tour;
-    }
-	
-	/**
-	 * sets the tour.
-	 * 
-	 * @param tour
-	 *            the new tour.
-	 */
-    public void setTour(Tour tour) {
-        this.tour = tour;
-    }
 
-	/**
-	 * gets the GPS position of the POI.
-	 * 
-	 * @return the GPS position of the POI.
-	 */
-	public GPSPosition getGpsPosition() {
+	
+	public Tour getTour() {
+		return tour;
+	}
+
+	public void setTour(Tour tour) {
+		this.tour = tour;
+	}
+
+	
+	public String getGpsPosition() {
 		return gpsPosition;
 	}
 
-	/**
-	 * sets the GPS position of POI.
-	 * 
-	 * @param namePOI
-	 *            the new GPS position of POI.
-	 */
-	public void setGpsPosition(GPSPosition gpsPosition) {
+	public void setGpsPosition(String gpsPosition) {
 		this.gpsPosition = gpsPosition;
 	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+//	public String getName() {
+//	throw new UnsupportedOperationException("Not implemented, yet.");
+//}
+
+}
