@@ -68,7 +68,7 @@ public class VlibTourTourManagementBean implements VlibTourTourManagement {
 		List<Tour> listTours = new ArrayList<>();
 		listTours = q.getResultList();
 		if (listTours != null && listTours.size() != 0) {
-			throw new RuntimeException("Tour already exists");
+			System.out.println("Tour already exists");
 		}
 
 		Tour tour = new Tour();
@@ -134,7 +134,7 @@ public class VlibTourTourManagementBean implements VlibTourTourManagement {
 
 		listpois = q.getResultList();
 		if (listpois != null && listpois.size() != 0) {
-			throw new RuntimeException("poi already exists");
+			System.out.println("poi already exists");
 		}
 
 		POI poi = new POI();
@@ -157,7 +157,7 @@ public class VlibTourTourManagementBean implements VlibTourTourManagement {
 		@SuppressWarnings("rawtypes")
 		List results = q1.getResultList();
 		if (results == null || results.size() == 0) {
-			throw new RuntimeException("POI is not yet created.");
+			System.out.println("POI is not yet created.");
 		}
 		POI poi = (POI) q1.getSingleResult();
 

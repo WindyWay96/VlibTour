@@ -5,6 +5,7 @@ mvn clean install -f ~/workspace/phucV/VlibTour/vlibtour-tour-management/pom.xml
 
 mvn clean install -f ~/workspace/phucV/VlibTour/vlibtour-client/vlibtour-admin-client-tour-management/pom.xml
 
+./Scripts/admin_client_tour_management.sh empty toursAndPOIs
 asadmin undeploy vlibtour-tour-management-bean
 asadmin stop-database
 asadmin stop-domain domain1
