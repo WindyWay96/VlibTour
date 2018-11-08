@@ -1,25 +1,5 @@
-/**
-This file is part of the course CSC5002.
-
-Copyright (C) 2017 Télécom SudParis
-
-This is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This software platform is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with the muDEBS platform. If not, see <http://www.gnu.org/licenses/>.
-
-Initial developer(s): Denis Conan
-Contributor(s):
- */
 package vlibtour.vlibtour_admin_client;
+
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +9,7 @@ import javax.naming.NamingException;
 
 import vlibtour.vlibtour_tour_management.api.VlibTourTourManagement;
 import vlibtour.vlibtour_tour_management.entity.Tour;
+
 /**
  * This class defines the administration client of the case study vlibtour.
  * <ul>
@@ -84,6 +65,9 @@ public class VlibTourTourManagementAdminClient {
 		
 		System.out.println(dash);
 
+		// Get POI
+		System.out.println("List of POIs " + sb.listPOIs());
+		System.out.println(dash);
 		
 		// Add a POI with poid = 20 to a tour with tourID = 10
 		System.out.println("POI 1 has been added to tour 1 " + sb.addPoiToTour(10, 20));
@@ -96,6 +80,13 @@ public class VlibTourTourManagementAdminClient {
 		// List tour
 		System.out.println("List of the tours " + sb.findAllTours());
 		System.out.println(dash);
+		
+		// Get info of a POI
+		System.out.println("INFO of POI 1: " + sb.findPOI(20));
+		System.out.println(dash);
+		
+
+		
 
 }  catch(Exception e) {
 	e.printStackTrace();
@@ -103,4 +94,3 @@ public class VlibTourTourManagementAdminClient {
 
 }
 }
-
