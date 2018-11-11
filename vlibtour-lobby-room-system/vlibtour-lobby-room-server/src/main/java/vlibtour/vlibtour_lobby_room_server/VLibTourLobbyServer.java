@@ -75,7 +75,7 @@ public class VLibTourLobbyServer implements Runnable, VLibTourLobbyService {
 		try {
 			connection = factory.newConnection();
 			channel = connection.createChannel();
-			channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+			channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 			channel.queueDeclare(QUEUE_NAME, QUEUE_DURABLE, QUEUE_EXCLUSIVE, QUEUE_AUTODELETE, null);
 			channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, BINDING_KEY);
 			rpcServer = new JsonRpcServer(channel, QUEUE_NAME, VLibTourLobbyService.class, this);
@@ -157,14 +157,10 @@ public class VLibTourLobbyServer implements Runnable, VLibTourLobbyService {
 				Arrays.asList(new CharacterRule(EnglishCharacterData.UpperCase, 1),
 						new CharacterRule(EnglishCharacterData.LowerCase, 1),
 						new CharacterRule(EnglishCharacterData.Digit, 1)));
-		// TODO : we do not manage access control and consider that if the user
-		// already exists then this is not the first connection
-		// add_user not implemented in Hop => use shell command
+		
 		new ProcessBuilder("rabbitmqctl", "add_user", userId, password).inheritIO().start().waitFor();
-		// set_permissions not implemented in Hop => use shell command
 		new ProcessBuilder("rabbitmqctl", "set_permissions", "-p", vhost, userId, ".*", ".*", ".*").inheritIO().start()
 				.waitFor();
-		// add permissions to user guest in order to observe and log
 		new ProcessBuilder("rabbitmqctl", "set_permissions", "-p", vhost, "guest", ".*", ".*", ".*").inheritIO().start()
 				.waitFor();
 		new ProcessBuilder("rabbitmqctl", "list_permissions", "-p", vhost).inheritIO().start().waitFor();
